@@ -1,0 +1,94 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+import SigninWithGoogle from "@/components/SigninWithGoogle";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
+
+const page = () => {
+  const router = useRouter();
+  const { register, handleSubmit, formState: { errors} } = useForm();
+
+  const onSubmit = async (data) => {
+
+    if(data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const response = await fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      toast.success("Registration successful");
+      const signinResponse = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+        callbackUrl: '/'
+      });
+
+      if (signinResponse?.ok) {
+        router.push('/');
+      }
+
+      if (signinResponse?.error) {
+        toast.error(response.error);
+      }
+    } else {
+      toast.error("Registration failed")
+    }
+  }
+
+  return (
+    <div className="w-[500px] m-auto ">
+      <SigninWithGoogle />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-3">
+          <input
+            type="text"
+            placeholder="Username"
+            className="border border-gray-300 px-2 py-1 rounded-lg"
+            {...register("username", { required: "Username is required" })}
+          />
+          {errors.username && <p className="text-red-500">{errors.username.message}</p>}
+          <input
+            type="email"
+            placeholder="Email"
+            className="border border-gray-300 px-2 py-1 rounded-lg"
+            {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email" } })}
+          />
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+          <input
+            type="password"
+            placeholder="Password"
+            className="border border-gray-300 px-2 py-1 rounded-lg"
+            {...register("password", { required: "Password is required", minLength: { value: 8, message: "Password must have than 8 characters" } })}
+          />
+          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="border border-gray-300 px-2 py-1 rounded-lg"
+            {...register("confirmPassword", { required: "Password confirmation is required" })}
+          />
+          {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
+          <button
+            type="submit"
+            className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 rounded-lg"
+          >
+            Sign up
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default page;
