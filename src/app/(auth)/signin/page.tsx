@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SigninWithGoogle from "@/components/SigninWithGoogle";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 const page = () => {
   const router = useRouter();
@@ -22,19 +22,23 @@ const page = () => {
 
       if (response?.ok) {
         toast.success("Signin successful");
-        router.refresh()
-        router.push('/');
+        // router.refresh()
+        // router.push('/');
+        window.location.href = '/';
+      }
+
+      if (response?.error) {
+        toast.error("Signin failed");
       }
       // console.log(response);
     } catch (error) {
       // Handle error
-      toast.error("Signin failed");
+      toast.error(error.message);
     }
   }
 
   return (
-    <div className="w-[500px] m-auto ">
-      <SigninWithGoogle />
+    <div className="w-full">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-3">
           <input
@@ -58,6 +62,11 @@ const page = () => {
             Sign In
           </button>
         </div>
+        <SigninWithGoogle />
+
+        <p className="text-center mt-4">
+          Don't have an account? <Link href="/signup" className="text-blue-500">Sign Up</Link>
+        </p>
       </form>
     </div>
   );

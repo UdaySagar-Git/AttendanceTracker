@@ -57,10 +57,8 @@ export async function POST(req: Request) {
 
     //returning the user without the password
 
-    const { password: _, UnhashedPassword: __, ...rest } = user;
-
     return NextResponse.json(
-      { user: rest, message: "User created successfully" },
+      { message: "User created successfully" },
       { status: 201 }
     );
   } catch (error) {

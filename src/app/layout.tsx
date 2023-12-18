@@ -24,8 +24,8 @@ export default async function RootLayout({
         <div className='max-h-[30px]'>
           <ToasterProvider />
         </div>
-        <Header currentUser={currentUser} />
-        
+        {currentUser && <Header currentUser={currentUser} />}
+
         {children}
       </body>
     </html>

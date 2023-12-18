@@ -10,8 +10,8 @@ interface Props {
   currentUser?: User | null;
 }
 
-const Header : React.FC<Props>= ({currentUser}) => {
-  
+const Header: React.FC<Props> = ({ currentUser }) => {
+
   return (
 
     <div className='shadow-md px-2 sticky top-0 bg-white z-10'>
@@ -22,7 +22,20 @@ const Header : React.FC<Props>= ({currentUser}) => {
             Project
           </div>
         </Link>
-        <SignoutButton />
+        <div className='flex gap-3'>
+          <Link href="/profile">
+            {!currentUser?.password ? (
+              <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg hidden sm:block' >
+                Create Password
+              </button>
+            ) : <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg hidden sm:block' >
+              Change Password
+            </button>
+
+            }
+          </Link>
+          <SignoutButton />
+        </div>
       </div>
     </div>
   )

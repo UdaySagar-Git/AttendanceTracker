@@ -1,18 +1,18 @@
 "use client"
 
-import { useRouter } from "next/navigation";
 import SigninWithGoogle from "@/components/SigninWithGoogle";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 
 const page = () => {
-  const router = useRouter();
-  const { register, handleSubmit, formState: { errors} } = useForm();
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
 
-    if(data.password !== data.confirmPassword) {
+    if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
@@ -35,7 +35,8 @@ const page = () => {
       });
 
       if (signinResponse?.ok) {
-        router.push('/');
+        // router.push('/');
+        window.location.href = '/';
       }
 
       if (signinResponse?.error) {
@@ -47,8 +48,7 @@ const page = () => {
   }
 
   return (
-    <div className="w-[500px] m-auto ">
-      <SigninWithGoogle />
+    <div className="w-full">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-3">
           <input
@@ -86,6 +86,10 @@ const page = () => {
             Sign up
           </button>
         </div>
+        <SigninWithGoogle />
+        <p className="text-center mt-4">
+          Already have a account ? <Link href="/signin" className="text-blue-500">Sign In</Link>
+        </p>
       </form>
     </div>
   );
