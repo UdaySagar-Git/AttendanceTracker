@@ -8,8 +8,9 @@ const userSchema = z
     email: z.string().min(1, "Email is required").email("Invalid email"),
     oldPassword: z
       .string()
-      .min(1, "Password is required")
-      .min(8, "Password must have than 8 characters"),
+      .optional()
+      ,
+
     newPassword: z
       .string()
       .min(1, "Password is required")
@@ -30,6 +31,13 @@ export async function POST(req: Request) {
     // console.log(body);
     const { newPassword, confirmPassword, oldPassword, email } =
       userSchema.parse(body);
+
+    if (newPassword !== confirmPassword) {
+      return NextResponse.json(
+        { message: "Passwords don't match" },
+        { status: 401 }
+      );
+    }
 
     //checking if old password matches
     const userExists = await db.user.findUnique({
@@ -53,7 +61,7 @@ export async function POST(req: Request) {
         );
       }
 
-      const isPasswordValid = await compare(oldPassword, userExists.password);
+      const isPasswordValid = await compare(oldPassword, userExists.password!);
       if (!isPasswordValid) {
         return NextResponse.json(
           { message: "Old password is incorrect" },
@@ -65,7 +73,7 @@ export async function POST(req: Request) {
     const password = await hash(newPassword, 10);
 
     //updating the password with new password
-    const user = await db.user.update({
+    const updatedUser = await db.user.update({
       where: {
         email: email,
       },
@@ -81,9 +89,6 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     // console.log("Error in creating user", error);
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
