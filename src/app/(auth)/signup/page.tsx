@@ -62,7 +62,7 @@ const Page = () => {
             type="email"
             placeholder="Email"
             className="border border-gray-300 px-2 py-1 rounded-lg"
-            {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email" } })}
+            {...register("email", { required: "Email is required" })}
           />
           {errors.email && <p className="text-red-500">{errors.email.message}</p>}
           <input
