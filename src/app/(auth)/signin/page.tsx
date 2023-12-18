@@ -1,14 +1,12 @@
 "use client"
 
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import SigninWithGoogle from "@/components/SigninWithGoogle";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const page = () => {
-  const router = useRouter();
+const Page = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
@@ -72,4 +70,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
