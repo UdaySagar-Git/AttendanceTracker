@@ -7,7 +7,6 @@ import prisma from "@/libs/db";
 import NextAuth from "next-auth";
 
 export const authOptions: AuthOptions = {
-
   adapter: PrismaAdapter(prisma),
   debug: process.env.NODE_ENV === "development",
   session: {
@@ -55,6 +54,21 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  // callbacks: {
+  //   async session({ session, user, token }) {
+  //     console.log("session", session);
+  //     console.log("user", user);
+  //     console.log("token", token);
+  //     return session;
+  //   },
+  //   async jwt({ token, user, account, profile, isNewUser }) {
+  //     console.log("token", token);
+  //     console.log("user", user);
+  //     console.log("account", account);
+  //     console.log("profile", profile);
+  //     return token;
+  //   },
+  // },
 };
 
 const handler = NextAuth(authOptions);

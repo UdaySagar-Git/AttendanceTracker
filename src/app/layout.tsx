@@ -4,7 +4,9 @@ import '@/styles/globals.css'
 import Header from '../components/Header'
 import getCurrentUser from '@/actions/getCurrentUser'
 import ToasterProvider from '@/components/ToasterProvider'
-
+import { SessionProvider } from 'next-auth/react'
+import AuthProvider from '@/providers/AuthProvider'
+import { redirect } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -18,16 +20,19 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const currentUser = await getCurrentUser();
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className='max-h-[30px]'>
-          <ToasterProvider />
-        </div>
-        {currentUser && <Header currentUser={currentUser} />}
 
-        {children}
-      </body>
-    </html>
+  return (
+    <AuthProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className='max-h-[30px]'>
+            <ToasterProvider />
+          </div>
+          {currentUser && <Header currentUser={currentUser} />}
+
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   )
 }

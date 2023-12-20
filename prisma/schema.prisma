@@ -10,19 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  user
+  admin
+  owner
+  disabled
+}
+
 model User {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   name             String?
   username         String?
   email            String?   @unique
   emailVerified    DateTime?
-  image            String?
+  image            String?   @default("https://www.mediopinions.com/cmsadmin/image/1643299956_avatar-1.jpg")
   UnhashedPassword String?
   password         String?
+  role             Role?     @default(user)
+  organisation     String?   @default("Personal")
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
   account          Account[]
   session          Session[]
+}
+
+model DeletedUsers {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  name             String?
+  username         String?
+  email            String?
+  emailVerified    DateTime?
+  image            String?
+  UnhashedPassword String?
+  password         String?
+  role             Role?
+  organisation     String?
+  createdAt        DateTime
+  updatedAt        DateTime
+  deletedAt        DateTime  @default(now())
 }
 
 model Account {

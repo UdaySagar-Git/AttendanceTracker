@@ -22,7 +22,18 @@ const Header: React.FC<Props> = ({ currentUser }) => {
             Project
           </div>
         </Link>
+
+
         <div className='flex gap-3'>
+          {
+            currentUser?.role === 'admin' && (
+              <Link href='/admin'>
+                <button className='bg-red-500 hover:bg-red-800 text-white text-sm font-semibold py-2 px-3  rounded-lg hidden sm:block' >
+                  Admin
+                </button>
+              </Link>
+            )
+          }
           <Link href="/profile">
             {!currentUser?.password ? (
               <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg hidden sm:block' >
@@ -31,7 +42,6 @@ const Header: React.FC<Props> = ({ currentUser }) => {
             ) : <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg hidden sm:block' >
               Change Password
             </button>
-
             }
           </Link>
           <SignoutButton />

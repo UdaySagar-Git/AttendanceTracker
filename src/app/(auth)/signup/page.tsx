@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const Page = () => {
+const SignUp = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -95,4 +95,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default SignUp;
