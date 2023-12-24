@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base{
+  button{
+    @apply bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 mx-4 rounded-lg
+  }
+  /* input{
+    @apply mx-4
+  } */
+}

@@ -9,17 +9,18 @@ const DateArray = (
   }
 ) => {
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-4 ">
       {dateArray.length > 0 &&
         <div className="px-2">
-          <div>Date</div>
-          <div>Day</div>
-          <div>Total Classes : {attendCount.totalClassesTillEndDate}</div>
-          <div>Will Attended : {attendCount.totalWillAttendedClasses}</div>
-        </div>}
+          <div className="text-lg font-bold mb-2">Date</div>
+          <div className="text-lg font-bold mb-2">Day</div>
+          <div className="text-lg font-bold mb-2">Total Classes: {attendCount.totalClassesTillEndDate}</div>
+          <div className="text-lg font-bold mb-2">Will Attend: {attendCount.totalWillAttendedClasses}</div>
+        </div>
+      }
       <div>
         {dateArray.length > 0 && (
-          <div className="flex ">
+          <div className="flex flex-wrap ">
             {dateArray.map((item, index) => (
               <div key={index} className="w-14 flex flex-col justify-center items-center">
                 {/* <div>{`${item.Date[0]}/${item.Date[1]}/${item.Date[2]} `}</div> */}
@@ -47,7 +48,7 @@ const DateArray = (
                   }} className='w-[100px] mx-2' />
                 </div> */}
 
-                <div className="will-attend">
+                <div >
                   <input type="number" max={item.ClassesCount} min={0} value={item.AttendCount} onChange={(e) => {
                     const val = e.target.value;
                     // handleAttendCountChange(index,val)

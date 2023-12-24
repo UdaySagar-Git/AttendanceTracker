@@ -10,29 +10,27 @@ const BunkCount = (
   }
 ) => {
   return (
-    <div>
-      <div>
-        <h1>If you wont skip any class then your attendece will be
-          <span className="text-2xl ">{((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)} %</span>
-        </h1>
+    <div className="flex flex-col justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl">If you won't skip any class then your attendance will be</h1>
+        <span className="text-4xl font-bold">{((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%</span>
       </div>
 
-      {/* Attence Count */}
-      <div>
-        <h1>You can skip <span className="text-2xl ">{result}</span> more classes till the selected date <span className="text-2xl ">{dateRange.endDate}</span> in order to maintain your attendence <span className="text-2xl ">{
-          ((currentAttendence.attended + attendCount.totalWillAttendedClasses - result) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)
-        }%</span></h1>
+      {/* Attendance Count */}
+      <div className="mt-8 text-center">
+        <h1 className="text-2xl">You can skip <span className="text-4xl font-bold">{result}</span> more classes till the selected date <span className="text-4xl font-bold">{dateRange.endDate}</span> in order to maintain your attendance <span className="text-4xl font-bold">
+          {((currentAttendence.attended + attendCount.totalWillAttendedClasses - result) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%
+        </span></h1>
       </div>
 
-      <hr />
+      <hr className="my-8" />
       {/* Note  */}
 
       {/* <div>
         <h1>Note</h1>
         <ul>
           <li>
-            <p>Please use this application at your own risk ! and I wont be responsible for any of the consequences you face</p>
-            
+            <p>Please use this application at your own risk! I won't be responsible for any of the consequences you face.</p>
           </li>
         </ul>
       </div> */}

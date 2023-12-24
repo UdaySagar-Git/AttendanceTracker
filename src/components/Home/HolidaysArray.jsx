@@ -26,13 +26,15 @@ const HolidaysArray = ({ holidayArray, setHolidayArray }) => {
   };
 
   return (
-    <div>
-      <h1>Public Holidays</h1>
-      <input type="date" value={newHoliday} onChange={(e) => setNewHoliday(e.target.value)} />
-      <button onClick={handleDateChange}>Add Holiday</button>
-      <ul>
+    <div className="flex flex-col ">
+      <h1 className="text-2xl font-bold mb-4">Public Holidays</h1>
+      <div className="flex items-center mb-4">
+        <input type="date" value={newHoliday} onChange={(e) => setNewHoliday(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md mr-2" />
+        <button onClick={handleDateChange} >Add Holiday</button>
+      </div>
+      <ul className="text-center">
         {holidayArray.map((holiday, index) => (
-          <li key={index}>
+          <li key={index} className="mb-2">
             {holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}
           </li>
         ))}

@@ -11,7 +11,7 @@ import CurrentAttendence from "./CurrentAttendence"
 import DateArray from './DateArray';
 import HolidaysArray from './HolidaysArray';
 
-function HomePage() {
+function HomePage({ currentUser }) {
 
   function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
@@ -24,10 +24,8 @@ function HomePage() {
     ].join('-');
   }, []);
 
-
-
   const [currentAttendence, setCurrentAttendence] = useState({ attended: null, total: null });
-  const [classesData, setClassesData] = useState({ Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
+  const [classesData, setClassesData] = useState(currentUser.classesData || { Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
   const [dateRange, setDateRange] = useState({ startDate: formatDate(), endDate: null });
   const [dateArray, setDateArray] = useState([]);
   const [holidayArray, setHolidayArray] = useState([]);
@@ -68,20 +66,24 @@ function HomePage() {
         currentDate.setDate(currentDate.getDate() + 1);
       }
 
-      // set public holidays ClassesCount to 0
-      holidayArray.forEach((item) => {
-        const index = tempResultArray.findIndex((date) => date.Date[0] == item.Date[0] && date.Date[1] == item.Date[1] && date.Date[2] == item.Date[2]);
-        if (index != -1) {
-          tempResultArray[index].ClassesCount = 0;
-          tempResultArray[index].AttendCount = 0;
-        }
-      }
-      );
-
       setDateArray(tempResultArray);
     };
     generateDateArray();
-  }, [dateRange, classesData, holidayArray]);
+  }, [dateRange, classesData]);
+
+  useEffect(() => {
+    // set public holidays ClassesCount to 0
+    const tempResultArray = [...dateArray];
+    holidayArray.forEach((item) => {
+      const index = tempResultArray.findIndex((date) => date.Date[0] == item.Date[0] && date.Date[1] == item.Date[1] && date.Date[2] == item.Date[2]);
+      if (index != -1) {
+        tempResultArray[index].ClassesCount = 0;
+        tempResultArray[index].AttendCount = 0;
+      }
+    }
+    );
+    setDateArray(tempResultArray);
+  }, [holidayArray])
 
   const handleChangeClassCount = (index) => {
     const tempDateArray = [...dateArray];
@@ -116,8 +118,8 @@ function HomePage() {
   }, [dateArray, requiredAttendence, classesData, requiredAttendence, attendCount]);
 
   return (
-    <div>
-      <div className="p-10">
+    <div className="w-full">
+      <div className="p-10 flex flex-col ">
         <DateRange dateRange={dateRange} setDateRange={setDateRange} />
         <ClassesCount classesData={classesData} setClassesData={setClassesData} />
         <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />

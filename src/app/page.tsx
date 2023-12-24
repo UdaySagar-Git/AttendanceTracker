@@ -30,10 +30,7 @@ export default async function Home() {
   }
 
   return (
-    <div>
-      <div className="text-sm p-5">
-        {JSON.stringify(currentUser)}
-      </div>
+    <div className="">
       <HomePage currentUser={currentUser} />
     </div>
   )
