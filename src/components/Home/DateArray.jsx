@@ -26,10 +26,10 @@ const DateArray = (
                 <div
                   className={
                     `border border-gray-400 rounded-full w-8 text-center
-                  ${item.AttendCount == 0 && item.ClassesCount !== 0 ? "bg-red-500 text-white" : ""}
-                  ${item.ClassesCount == 0 ? "bg-neutral-600 text-white" : ""}
-                  ${item.ClassesCount == item.AttendCount && item.ClassesCount != 0 ? "bg-green-500 text-white" : ""}
-                  ${item.ClassesCount != item.AttendCount && item.ClassesCount != 0 && item.attendCount != 0 ? "bg-yellow-500 text-white" : ""}
+                    ${item.ClassesCount == 0 && item.AttendCount == 0 && "bg-neutral-600 text-white"}
+                    ${item.ClassesCount != item.AttendCount && item.ClassesCount != 0 && item.AttendCount != 0 && "bg-yellow-500 text-white"}
+                    ${item.ClassesCount == item.AttendCount && item.ClassesCount != 0 && "bg-green-500 text-white"}
+                    ${item.ClassesCount != 0 && item.AttendCount == 0 && "bg-red-500 text-white"} 
                  `}
 
                 >
@@ -37,6 +37,15 @@ const DateArray = (
                 <div>{item.Date[3]}</div>
                 <div onClick={() => handleChangeClassCount(index)}>{item.ClassesCount}</div>
                 {/* <div onClick={() => (index)}>{item.AttendCount}</div> */}
+
+                {/* <div>
+                  <input type="number" min={0} value={item.ClassesCount} onChange={(e) => {
+                    const val = e.target.value;
+                    const tempDateArray = [...dateArray];
+                    tempDateArray[index].ClassesCount = val;
+                    setDateArray(tempDateArray);
+                  }} className='w-[100px] mx-2' />
+                </div> */}
 
                 <div className="will-attend">
                   <input type="number" max={item.ClassesCount} min={0} value={item.AttendCount} onChange={(e) => {

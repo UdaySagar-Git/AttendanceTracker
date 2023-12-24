@@ -9,6 +9,7 @@ import AttendencePrint from './AttendencePrint';
 import BunkCount from './BunkCount';
 import CurrentAttendence from "./CurrentAttendence"
 import DateArray from './DateArray';
+import HolidaysArray from './HolidaysArray';
 
 function HomePage() {
 
@@ -29,6 +30,7 @@ function HomePage() {
   const [classesData, setClassesData] = useState({ Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
   const [dateRange, setDateRange] = useState({ startDate: formatDate(), endDate: null });
   const [dateArray, setDateArray] = useState([]);
+  const [holidayArray, setHolidayArray] = useState([]);
   const [requiredAttendence, setRequiredAttendence] = useState(75);
   const [result, setResult] = useState(0);
   const [attendCount, setAttendCount] = useState({});
@@ -65,10 +67,21 @@ function HomePage() {
 
         currentDate.setDate(currentDate.getDate() + 1);
       }
+
+      // set public holidays ClassesCount to 0
+      holidayArray.forEach((item) => {
+        const index = tempResultArray.findIndex((date) => date.Date[0] == item.Date[0] && date.Date[1] == item.Date[1] && date.Date[2] == item.Date[2]);
+        if (index != -1) {
+          tempResultArray[index].ClassesCount = 0;
+          tempResultArray[index].AttendCount = 0;
+        }
+      }
+      );
+
       setDateArray(tempResultArray);
     };
     generateDateArray();
-  }, [dateRange, classesData]);
+  }, [dateRange, classesData, holidayArray]);
 
   const handleChangeClassCount = (index) => {
     const tempDateArray = [...dateArray];
@@ -109,6 +122,7 @@ function HomePage() {
         <ClassesCount classesData={classesData} setClassesData={setClassesData} />
         <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
         <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
+        <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
         <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
         <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
       </div>
