@@ -142,7 +142,7 @@ const Page = ({ params }) => {
               className="ml-2"
             />
           </label>
-          <label className="block mb-2 text-sm">
+          {/* <label className="block mb-2 text-sm">
             Password:
             <input
               type="text"
@@ -150,7 +150,7 @@ const Page = ({ params }) => {
               onChange={(event) => setUser({ ...user, UnhashedPassword: event.target.value })}
               className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
             />
-          </label>
+          </label> */}
           <label className="block mb-2 text-sm">
             Role:
             <select

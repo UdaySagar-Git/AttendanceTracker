@@ -15,6 +15,7 @@ enum Role {
   admin
   owner
   disabled
+  deleted
 }
 
 model User {
@@ -30,6 +31,7 @@ model User {
   organisation     String?   @default("Personal")
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+  classesData      Json      @default("{ \"Mon\": \"6\" , \"Tue\": \"6\" , \"Wed\": \"6\" , \"Thu\": \"6\" , \"Fri\": \"6\" , \"Sat\": \"6\" , \"Sun\": \"0\" }")
   account          Account[]
   session          Session[]
 }

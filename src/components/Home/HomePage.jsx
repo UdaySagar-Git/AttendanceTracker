@@ -1,0 +1,119 @@
+"use client"
+
+import { useEffect } from "react";
+import { useState } from "react"
+import { useCallback } from "react";
+import DateRange from './DateRange';
+import ClassesCount from './ClassesCount';
+import AttendencePrint from './AttendencePrint';
+import BunkCount from './BunkCount';
+import CurrentAttendence from "./CurrentAttendence"
+import DateArray from './DateArray';
+
+function HomePage() {
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  const formatDate = useCallback((date = new Date()) => {
+    return [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-');
+  }, []);
+
+
+
+  const [currentAttendence, setCurrentAttendence] = useState({ attended: null, total: null });
+  const [classesData, setClassesData] = useState({ Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
+  const [dateRange, setDateRange] = useState({ startDate: formatDate(), endDate: null });
+  const [dateArray, setDateArray] = useState([]);
+  const [requiredAttendence, setRequiredAttendence] = useState(75);
+  const [result, setResult] = useState(0);
+  const [attendCount, setAttendCount] = useState({});
+
+  const [MaxAttendenceCanSecure, setMaxAttendenceCanSecure] = useState();
+
+  useEffect(() => {
+    setMaxAttendenceCanSecure((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate));
+  }, [currentAttendence, attendCount])
+
+  useEffect(() => {
+    const generateDateArray = () => {
+      const start = new Date(dateRange.startDate);
+      const end = new Date(dateRange.endDate);
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const tempResultArray = [];
+
+      let currentDate = new Date(start);
+
+      while (currentDate <= end) {
+        const dayOfWeek = daysOfWeek[currentDate.getDay()];
+        const classesCount = classesData[dayOfWeek];
+
+        tempResultArray.push({
+          Date: [
+            currentDate.getDate(),
+            currentDate.getMonth() + 1,
+            currentDate.getFullYear(),
+            dayOfWeek,
+          ],
+          ClassesCount: classesCount,
+          AttendCount: classesCount
+        });
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      setDateArray(tempResultArray);
+    };
+    generateDateArray();
+  }, [dateRange, classesData]);
+
+  const handleChangeClassCount = (index) => {
+    const tempDateArray = [...dateArray];
+    tempDateArray[index].ClassesCount = parseInt(window.prompt("Enter new class count", tempDateArray[index].ClassesCount));
+    tempDateArray[index].AttendCount = tempDateArray[index].ClassesCount;
+    setDateArray(tempDateArray);
+  }
+
+  useEffect(() => {
+    handleCalculate();
+  }, [dateArray, requiredAttendence, classesData, currentAttendence, MaxAttendenceCanSecure])
+
+
+  const handleCalculate = useCallback(() => {
+    let totalClassesTillEndDate = 0; //a 
+    let totalWillAttendedClasses = 0;
+    dateArray.forEach((item) => {
+      totalClassesTillEndDate += parseInt(item.ClassesCount);
+      totalWillAttendedClasses += parseInt(item.AttendCount);
+    });
+
+    const newAttendCount = {
+      totalWillAttendedClasses: parseInt(totalWillAttendedClasses),
+      totalClassesTillEndDate: parseInt(totalClassesTillEndDate)
+    }; newAttendCount
+
+    setAttendCount(newAttendCount);
+
+    const ClassesCanSkip = parseInt(attendCount.totalWillAttendedClasses - (((currentAttendence.total + attendCount.totalClassesTillEndDate) * (requiredAttendence / 100)) - (currentAttendence.attended)));
+
+    setResult(ClassesCanSkip);
+  }, [dateArray, requiredAttendence, classesData, requiredAttendence, attendCount]);
+
+  return (
+    <div>
+      <div className="p-10">
+        <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+        <ClassesCount classesData={classesData} setClassesData={setClassesData} />
+        <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
+        <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
+        <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
+        <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
+      </div>
+    </div>
+  )
+}
+
+export default HomePage

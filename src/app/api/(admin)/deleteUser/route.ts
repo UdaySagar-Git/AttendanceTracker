@@ -20,12 +20,12 @@ export async function POST(req: Request) {
   }
 
   if (currentUser.role === "admin") {
-    const user =   await db.user.update({
+    const user = await db.user.update({
       where: {
         id: body.id,
       },
       data: {
-        role: "disabled",
+        role: "deleted",
       },
     });
     const deletedUser = await db.deletedUsers.create({
@@ -33,7 +33,11 @@ export async function POST(req: Request) {
         ...user,
       },
     });
- 
+    await db.user.delete({
+      where: {
+        id: body.id,
+      },
+    });
 
     return NextResponse.json({ message: "User deleted", deletedUser });
   }

@@ -2,6 +2,8 @@
 import getCurrentUser from "@/actions/getCurrentUser"
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import HomePage from "@/components/Home/HomePage";
+
 export default async function Home() {
   const currentUser = await getCurrentUser();
 
@@ -26,12 +28,13 @@ export default async function Home() {
       </div>
     )
   }
-  
+
   return (
     <div>
-      <div>
+      <div className="text-sm p-5">
         {JSON.stringify(currentUser)}
       </div>
+      <HomePage currentUser={currentUser} />
     </div>
   )
 }

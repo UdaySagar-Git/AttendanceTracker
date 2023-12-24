@@ -55,6 +55,34 @@ export const authOptions: AuthOptions = {
     }),
   ],
   // callbacks: {
+  //   async afterCallback(_, __, profile) {
+  //     // Use the user's email to find and include the data
+  //     const user = await prisma.user.findUnique({
+  //       where: { email: profile.email },
+  //       include: { data: true },
+  //     });
+
+  //     // Update the user object with the included data
+  //     profile.data = user?.data || null;
+
+  //     return Promise.resolve(true);
+  //   },
+  // },
+  callbacks: {
+    async signIn({ account, profile, email, credentials }) {
+      const isAllowedToSignIn = true;
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        // Return false to display a default error message
+        return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+      }
+    },
+  },
+
+  // callbacks: {
   //   async session({ session, user, token }) {
   //     console.log("session", session);
   //     console.log("user", user);

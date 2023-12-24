@@ -6,10 +6,14 @@ import { useRouter } from 'next/navigation';
 
 const UserDetails = () => {
   const [users, setUsers] = useState([]);
+  const [deletedUsers, setDeletedUsers] = useState([]);
   useEffect(() => {
     fetch('/api/userDetails')
       .then(res => res.json())
       .then(data => setUsers(data));
+    fetch('/api/deletedUsers')
+      .then(res => res.json())
+      .then(data => setDeletedUsers(data));
   }, []);
 
 
@@ -27,7 +31,7 @@ const UserDetails = () => {
           </tr>
         </thead>
         <tbody>
-          {users.filter((user) => user.role !== "disabled" ).map(user => (
+          {users.filter((user) => user.role !== "disabled").map(user => (
             <tr key={user.id}>
               <td>{user.email}</td>
               <td>{user.name}</td>
@@ -56,7 +60,7 @@ const UserDetails = () => {
           </tr>
         </thead>
         <tbody>
-          {users.filter((user) => user.role === "disabled" ).map(user => (
+          {users.filter((user) => user.role === "disabled").map(user => (
             <tr key={user.id}>
               <td>{user.email}</td>
               <td>{user.name}</td>
@@ -72,7 +76,36 @@ const UserDetails = () => {
             </tr>
           ))}
         </tbody>
-        </table>
+      </table>
+      <h1 className='mt-9'>Deleted Users</h1>
+      <table className='border-collapse w-full'>
+        <thead>
+          <tr>
+            <th className='text-start'>Email</th>
+            <th className='text-start'>Name</th>
+            <th className='text-start'>Role</th>
+            <th className='text-start'>Organisation</th>
+            <th className='text-start'>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {deletedUsers.map(user => (
+            <tr key={user.id}>
+              <td>{user.email}</td>
+              <td>{user.name}</td>
+              <td>{user.role}</td>
+              <td>{user.organisation}</td>
+              <td>
+                <Link href={`admin/editUser/${user.id}`}>
+                  <button className='bg-rose-500 hover:bg-rose-700 text-white font-bold py-[5px] px-4 rounded' >
+                    Edit
+                  </button>
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div >
   );
 };
