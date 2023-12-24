@@ -10,15 +10,15 @@ const BunkCount = (
   }
 ) => {
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center mt-5">
       <div className="text-center">
-        <h1 className="text-2xl">If you won't skip any class then your attendance will be</h1>
-        <span className="text-4xl font-bold">{((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%</span>
+        <h1 className="text-base md:text-xl">If you won't skip any class then your attendance will be</h1>
+        <span className="text-xl md:text-2xl font-bold">{((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%</span>
       </div>
 
       {/* Attendance Count */}
       <div className="mt-8 text-center">
-        <h1 className="text-2xl">You can skip <span className="text-4xl font-bold">{result}</span> more classes till the selected date <span className="text-4xl font-bold">{dateRange.endDate}</span> in order to maintain your attendance <span className="text-4xl font-bold">
+        <h1 className="text-base md:text-xl">You can skip <span className="text-xl md:text-2xl font-bold">{result}</span> more classes till the selected date <span className="text-xl md:text-2xl font-bold">{dateRange.endDate}</span> in order to maintain your attendance <span className="text-xl md:text-2xl font-bold">
           {((currentAttendence.attended + attendCount.totalWillAttendedClasses - result) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%
         </span></h1>
       </div>

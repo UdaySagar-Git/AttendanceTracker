@@ -14,15 +14,16 @@ const Header: React.FC<Props> = ({ currentUser }) => {
 
   return (
 
-    <div className='shadow-md px-2 sticky top-0 bg-white z-10'>
+    <div className='shadow-md px-2 bg-white z-10 sticky top-0'>
       <div className='flex items-center justify-between p-2'>
-        <LuMenu className='text-2xl sm:hidden' />
+        <div >
+          <LuMenu className='text-2xl sm:hidden' />
+        </div>
         <Link href='/'>
           <div className='text-2xl font-bold hidden sm:block'>
             Project
           </div>
         </Link>
-
 
         <div className='flex gap-3'>
           {

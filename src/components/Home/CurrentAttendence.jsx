@@ -5,20 +5,20 @@ const CurrentAttendence = (
 ) => {
   const Max = +(MaxAttendenceCanSecure)
   return (
-    <div className="current-attendence flex flex-col">
+    <div className="current-attendence flex flex-col w-full sm:w-auto">
       <div className='' >
-        <div className="mb-4">
-          <label className="text-lg font-bold w-[60%]">Attended Classes</label>
-          <input type="number" value={currentAttendence.attended} onChange={(e) => setCurrentAttendence({ ...currentAttendence, attended: parseInt(e.target.value) })} className="border border-gray-300 rounded-md px-2 py-1" />
+        <div className="mb-4 flex items-center justify-around">
+          <label className="text-base font-semibold mr-2 ">Attended Classes</label>
+          <input type="number" value={currentAttendence.attended} onChange={(e) => setCurrentAttendence({ ...currentAttendence, attended: parseInt(e.target.value) })} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
         </div>
         {
           currentAttendence.attended === null && <p className="text-red-500 text-xs">* please enter attended classes</p>
         }
       </div>
       <div className='' >
-        <div className="mb-4">
-          <label className="text-lg font-bold w-[60%]">Total Classes</label>
-          <input type="number" value={currentAttendence.total} onChange={(e) => setCurrentAttendence({ ...currentAttendence, total: parseInt(e.target.value) })} className="border border-gray-300 rounded-md px-2 py-1" />
+        <div className="mb-4 flex items-center justify-around">
+          <label className="text-base font-semibold mr-2 ">Total Classes</label>
+          <input type="number" value={currentAttendence.total} onChange={(e) => setCurrentAttendence({ ...currentAttendence, total: parseInt(e.target.value) })} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
         </div>
         {
           currentAttendence.total === null && <p className="text-red-500 text-xs">* please enter total classes</p>
@@ -27,12 +27,11 @@ const CurrentAttendence = (
           currentAttendence.total < currentAttendence.attended && currentAttendence.total != null && <p className="text-red-500 text-xs">*  Total classes should be greater than attended classes</p>
         }
       </div>
-      <div className='' >
-        <div>
-          <label className="text-lg font-bold w-[60%]">Required Attendence</label>
-          <input type="number" value={requiredAttendence} max={Max.toFixed(0)} onChange={(e) => setRequiredAttendence(parseInt(e.target.value))} className="border border-gray-300 rounded-md px-2 py-1" />
-          <span>%</span>
-        </div>
+      <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
+      <div className=' flex items-center justify-around' >
+        <label className="text-base font-semibold  ">Required Attendence</label>
+        <input type="number" value={requiredAttendence} max={Max.toFixed(0)} onChange={(e) => setRequiredAttendence(parseInt(e.target.value))} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
+        {/* <span>%</span> */}
         {
           requiredAttendence > Max && <p className="text-red-500 text-xs">* please enter less than {Max.toFixed(0)}%</p>
         }

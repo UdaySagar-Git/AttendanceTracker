@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const HolidaysArray = ({ holidayArray, setHolidayArray }) => {
-  
+
   const [newHoliday, setNewHoliday] = useState('');
 
   const handleDateChange = () => {
@@ -26,19 +26,21 @@ const HolidaysArray = ({ holidayArray, setHolidayArray }) => {
   };
 
   return (
-    <div className="flex flex-col ">
-      <h1 className="text-2xl font-bold mb-4">Public Holidays</h1>
-      <div className="flex items-center mb-4">
-        <input type="date" value={newHoliday} onChange={(e) => setNewHoliday(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md mr-2" />
-        <button onClick={handleDateChange} >Add Holiday</button>
+    <div className="md:mt-10 w-full">
+      <h1 className="text-2xl font-semibold mb-4 ml-6">Holiday List</h1>
+      <div className='border shadow-lg border-black p-3 rounded-xl flex flex-col  justify-center items-center '>
+        <div className="flex items-center mb-4 ">
+          <input type="date" value={newHoliday} onChange={(e) => setNewHoliday(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md mr-2" />
+          <button onClick={handleDateChange} className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2 rounded-lg">Add Holiday</button>
+        </div>
+        <ul className="text-center">
+          {holidayArray.map((holiday, index) => (
+            <li key={index} className="mb-2">
+              {holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="text-center">
-        {holidayArray.map((holiday, index) => (
-          <li key={index} className="mb-2">
-            {holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

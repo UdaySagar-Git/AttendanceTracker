@@ -9,24 +9,54 @@ const DateArray = (
   }
 ) => {
   return (
-    <div className="flex gap-4 ">
+    <div className={`flex gap-4 flex-col md:flex-row  ${dateArray.length > 0 && " border shadow-lg border-black p-3 rounded-xl"}`}>
       {dateArray.length > 0 &&
-        <div className="px-2">
-          <div className="text-lg font-bold mb-2">Date</div>
-          <div className="text-lg font-bold mb-2">Day</div>
-          <div className="text-lg font-bold mb-2">Total Classes: {attendCount.totalClassesTillEndDate}</div>
-          <div className="text-lg font-bold mb-2">Will Attend: {attendCount.totalWillAttendedClasses}</div>
+        <div className="px-2 hidden md:block">
+          <div className="text-sm font-semibold mb-2">Date</div>
+          <div className="text-sm font-semibold mb-2">Day</div>
+          <div className="text-sm font-semibold mb-1 w-[130px] flex justify-between ">
+            <span className=''>Total Classes</span>
+            <span className=''>
+
+              : {attendCount.totalClassesTillEndDate}
+            </span>
+          </div>
+          <div className="text-sm font-semibold  flex justify-between ">
+            <span className=''>Will Attend</span>
+            <span className=''>
+              : {attendCount.totalWillAttendedClasses}
+            </span>
+          </div>
+        </div>
+      }
+      {/* small screen */}
+      {dateArray.length > 0 &&
+        <div className="px-2 md:hidden flex justify-around items-center">
+          <div className="text-sm font-semibold  flex justify-between ">
+            <span className=''>Total Classes</span>
+            <span className=''>
+
+              : {attendCount.totalClassesTillEndDate}
+            </span>
+          </div>
+          <span>|</span>
+          <div className="text-sm font-semibold  flex justify-between ">
+            <span className=''>Will Attend</span>
+            <span className=''>
+              : {attendCount.totalWillAttendedClasses}
+            </span>
+          </div>
         </div>
       }
       <div>
         {dateArray.length > 0 && (
-          <div className="flex flex-wrap ">
+          <div className="flex flex-wrap  justify-center md:justify-start">
             {dateArray.map((item, index) => (
               <div key={index} className="w-14 flex flex-col justify-center items-center">
                 {/* <div>{`${item.Date[0]}/${item.Date[1]}/${item.Date[2]} `}</div> */}
                 <div
                   className={
-                    `border border-gray-400 rounded-full w-8 text-center
+                    `border border-gray-400 rounded-full w-8 text-center 
                     ${item.ClassesCount == 0 && item.AttendCount == 0 && "bg-neutral-600 text-white"}
                     ${item.ClassesCount != item.AttendCount && item.ClassesCount != 0 && item.AttendCount != 0 && "bg-yellow-500 text-white"}
                     ${item.ClassesCount == item.AttendCount && item.ClassesCount != 0 && "bg-green-500 text-white"}
@@ -36,7 +66,7 @@ const DateArray = (
                 >
                   {item.Date[0]}</div>
                 <div>{item.Date[3]}</div>
-                <div onClick={() => handleChangeClassCount(index)}>{item.ClassesCount}</div>
+                <div onClick={() => handleChangeClassCount(index)} className='cursor-pointer'>{item.ClassesCount}</div>
                 {/* <div onClick={() => (index)}>{item.AttendCount}</div> */}
 
                 {/* <div>
@@ -48,8 +78,8 @@ const DateArray = (
                   }} className='w-[100px] mx-2' />
                 </div> */}
 
-                <div >
-                  <input type="number" max={item.ClassesCount} min={0} value={item.AttendCount} onChange={(e) => {
+                <div className='max-w-fit'>
+                  <input type="number" max={item.ClassesCount} min={0} value={item.AttendCount} className='w-[40px] text-center ' onChange={(e) => {
                     const val = e.target.value;
                     // handleAttendCountChange(index,val)
                     const tempDateArray = [...dateArray];

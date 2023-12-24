@@ -29,7 +29,6 @@ export default async function RootLayout({
             <ToasterProvider />
           </div>
           {currentUser && <Header currentUser={currentUser} />}
-
           {children}
         </body>
       </html>

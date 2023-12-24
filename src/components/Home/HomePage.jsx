@@ -87,7 +87,9 @@ function HomePage({ currentUser }) {
 
   const handleChangeClassCount = (index) => {
     const tempDateArray = [...dateArray];
-    tempDateArray[index].ClassesCount = parseInt(window.prompt("Enter new class count", tempDateArray[index].ClassesCount));
+    const res = parseInt(window.prompt("Enter new class count", tempDateArray[index].ClassesCount));
+    if (!res) return;
+    tempDateArray[index].ClassesCount = res;
     tempDateArray[index].AttendCount = tempDateArray[index].ClassesCount;
     setDateArray(tempDateArray);
   }
@@ -118,15 +120,28 @@ function HomePage({ currentUser }) {
   }, [dateArray, requiredAttendence, classesData, requiredAttendence, attendCount]);
 
   return (
-    <div className="w-full">
-      <div className="p-10 flex flex-col ">
-        <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+    <div className="flex flex-col md:grid grid-cols-12 h-full mt-4 p-5">
+      {/* small devices */}
+      <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center ">
         <ClassesCount classesData={classesData} setClassesData={setClassesData} />
-        <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
-        <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
         <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
-        <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
-        <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
+      </div>
+      {/* large Devices */}
+      <div className="col-span-12  md:col-span-9 md:pr-4">
+        <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl">
+          <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+          <div className="w-full border-b border-zinc-700 my-3 md:hidden"/>
+          <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
+        </div>
+        <div className="mt-7">
+          <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
+          <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
+          <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
+        </div>
+      </div>
+      <div className="hidden md:block col-span-3">
+        <ClassesCount classesData={classesData} setClassesData={setClassesData} />
+        <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
       </div>
     </div>
   )
