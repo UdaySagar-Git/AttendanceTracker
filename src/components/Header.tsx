@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { LuMenu } from "react-icons/lu";
 import SignoutButton from './SignoutButton';
 import { User } from '@prisma/client';
+import { IoHome } from "react-icons/io5";
 
 interface Props {
   currentUser?: User | null;
@@ -16,9 +17,10 @@ const Header: React.FC<Props> = ({ currentUser }) => {
 
     <div className='shadow-md px-2 bg-white z-10 sticky top-0'>
       <div className='flex items-center justify-between p-2'>
-        <div >
-          <LuMenu className='text-2xl sm:hidden' />
-        </div>
+        <Link href='/' className='text-2xl sm:hidden'>
+          <LuMenu />
+          {/* <IoHome /> */}
+        </Link>
         <Link href='/'>
           <div className='text-2xl font-bold hidden sm:block'>
             Project
@@ -37,10 +39,10 @@ const Header: React.FC<Props> = ({ currentUser }) => {
           }
           <Link href="/profile">
             {!currentUser?.password ? (
-              <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg ' >
+              <button className='bg-gray-950 hover:bg-gray-800 text-white text-xs sm:text-sm font-semibold py-2 px-1 sm:px-3 w-[150px] rounded-lg ' >
                 Create Password
               </button>
-            ) : <button className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-2 px-3 w-[150px] rounded-lg ' >
+            ) : <button className='bg-gray-950 hover:bg-gray-800 text-white text-xs sm:text-sm font-semibold py-2 px-1 sm:px-3 w-[150px] rounded-lg ' >
               Change Password
             </button>
             }
