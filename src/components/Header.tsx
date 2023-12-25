@@ -23,7 +23,8 @@ const Header: React.FC<Props> = ({ currentUser }) => {
         </Link>
         <Link href='/'>
           <div className='text-2xl font-bold hidden sm:block'>
-            Project
+            <span className='text-red-800 text-4xl pr-2'>75</span>
+            Attendence
           </div>
         </Link>
 

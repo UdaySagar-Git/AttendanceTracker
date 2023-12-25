@@ -16,7 +16,20 @@ function HomePage({ currentUser }) {
   function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
   }
+
   const formatDate = useCallback((date = new Date()) => {
+    const currentHour = date.getHours();
+    const tomorrow = new Date(date);
+    tomorrow.setDate(date.getDate() + 1);
+
+    if (currentHour >= 17) {
+      return [
+        tomorrow.getFullYear(),
+        padTo2Digits(tomorrow.getMonth() + 1),
+        padTo2Digits(tomorrow.getDate()),
+      ].join('-');
+    }
+
     return [
       date.getFullYear(),
       padTo2Digits(date.getMonth() + 1),

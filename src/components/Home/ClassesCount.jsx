@@ -16,7 +16,7 @@ const ClassesCount = (
   }
   return (
     <div className="flex flex-col w-full ">
-      <div className='flex  '>
+      <div className='flex flex-wrap justify-center xl:justify-start  '>
         <h1 className="text-2xl font-semibold ml-6">Classes Count</h1>
         {!toggle ?
           <button onClick={() => setToggle(!toggle)} className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-1 px-3 mx-4 rounded-lg' >Edit</button>

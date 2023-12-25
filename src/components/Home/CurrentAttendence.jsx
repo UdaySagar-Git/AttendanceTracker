@@ -28,10 +28,13 @@ const CurrentAttendence = (
         }
       </div>
       <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
-      <div className=' flex items-center justify-between' >
-        <label className="text-base font-semibold  ">Required Attendence</label>
-        <input type="number" value={requiredAttendence} max={Max.toFixed(0)} onChange={(e) => setRequiredAttendence(parseInt(e.target.value))} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
+      <div>
+        <div className=' flex items-center justify-between' >
+          <label className="text-base font-semibold mr-2 ">Required Attendence</label>
+          <input type="number" value={requiredAttendence} max={Max.toFixed(0)} onChange={(e) => setRequiredAttendence(parseInt(e.target.value))} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
+        </div>
         {/* <span>%</span> */}
+
         {
           requiredAttendence > Max && <p className="text-red-500 text-xs">* please enter less than {Max.toFixed(0)}%</p>
         }

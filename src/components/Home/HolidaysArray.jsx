@@ -27,9 +27,9 @@ const HolidaysArray = ({ holidayArray, setHolidayArray }) => {
 
   return (
     <div className="md:mt-10 w-full">
-      <h1 className="text-2xl font-semibold mb-4 ml-6">Holiday List</h1>
+      <h1 className="text-2xl font-semibold mb-4 ml-6 text-center lg:text-left">Holiday List</h1>
       <div className='border shadow-lg border-black p-3 rounded-xl flex flex-col  justify-center items-center '>
-        <div className="flex items-center mb-4 ">
+        <div className="flex items-center mb-4 flex-wrap gap-2 justify-center ">
           <input type="date" value={newHoliday} onChange={(e) => setNewHoliday(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-md mr-2" />
           <button onClick={handleDateChange} className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2 rounded-lg">Add Holiday</button>
         </div>
