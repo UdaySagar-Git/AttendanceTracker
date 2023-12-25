@@ -137,18 +137,22 @@ function HomePage({ currentUser }) {
       {/* small devices */}
       <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center ">
         <ClassesCount classesData={classesData} setClassesData={setClassesData} />
-        <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
+        {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
       </div>
       {/* large Devices */}
       <div className="col-span-12  md:col-span-9 md:pr-4">
         <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl">
           <DateRange dateRange={dateRange} setDateRange={setDateRange} />
-          <div className="w-full border-b border-zinc-700 my-3 md:hidden"/>
+          <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
           <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
         </div>
         <div className="mt-7">
           <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
           <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
+          <div className=" md:hidden flex pb-5 mt-4 gap-5 items-center flex-wrap justify-center ">
+            {/* <ClassesCount classesData={classesData} setClassesData={setClassesData} /> */}
+            <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
+          </div>
           <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
         </div>
       </div>
