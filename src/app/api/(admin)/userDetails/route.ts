@@ -6,11 +6,11 @@ export async function GET(req: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.redirect("/login");
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   if (currentUser.role !== "admin") {
-    return NextResponse.redirect("/");
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   if (currentUser.role === "admin") {
