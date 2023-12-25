@@ -136,7 +136,7 @@ function HomePage({ currentUser }) {
     <div className="flex flex-col md:grid grid-cols-12 h-full mt-4 p-5">
       {/* small devices */}
       <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center ">
-        <ClassesCount classesData={classesData} setClassesData={setClassesData} />
+        <ClassesCount classesData={classesData} setClassesData={setClassesData} currentUser={currentUser} />
         {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
       </div>
       {/* large Devices */}
@@ -149,10 +149,10 @@ function HomePage({ currentUser }) {
         <div className="mt-7">
           <AttendencePrint requiredAttendence={requiredAttendence} currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} />
           <DateArray dateArray={dateArray} setDateArray={setDateArray} handleChangeClassCount={handleChangeClassCount} attendCount={attendCount} />
-          <div className=" md:hidden flex pb-5 mt-4 gap-5 items-center flex-wrap justify-center ">
+          {dateArray.length>0  && <div className=" md:hidden flex pb-5 mt-4 gap-5 items-center flex-wrap justify-center ">
             {/* <ClassesCount classesData={classesData} setClassesData={setClassesData} /> */}
             <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
-          </div>
+          </div>}
           <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
         </div>
       </div>

@@ -5,10 +5,11 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
 const ClassesCount = (
-  { classesData, setClassesData }
+  { classesData, setClassesData,currentUser }
 ) => {
   const router = useRouter()
   const [toggle, setToggle] = useState(false)
+  // const [isopen , setIsopen] = useState(true)
   const handleSave = async () => {
     setToggle(!toggle)
     await axios.post('/api/update-data', { classesData });
