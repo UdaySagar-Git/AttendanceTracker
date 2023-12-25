@@ -3,14 +3,14 @@
 import SigninWithGoogle from "@/components/SigninWithGoogle";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import Link from "next/link";
 
 const SignUp = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data ) => {
 
     if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match");
@@ -39,9 +39,6 @@ const SignUp = () => {
         window.location.href = '/';
       }
 
-      if (signinResponse?.error) {
-        toast.error(response.error);
-      }
     } else {
       toast.error("Registration failed")
     }

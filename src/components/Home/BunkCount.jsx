@@ -12,7 +12,7 @@ const BunkCount = (
   return (
     <div className="flex flex-col justify-center mt-5">
       <div className="text-center">
-        <h1 className="text-base md:text-xl">If you won't skip any class then your attendance will be</h1>
+        <h1 className="text-base md:text-xl">If you won&apos;t skip any class then your attendance will be</h1>
         <span className="text-xl md:text-2xl font-bold">{((currentAttendence.attended + attendCount.totalWillAttendedClasses) * 100 / (currentAttendence.total + attendCount.totalClassesTillEndDate)).toFixed(2)}%</span>
       </div>
 
