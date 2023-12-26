@@ -27,18 +27,17 @@ const SignUp = () => {
 
     if (response.ok) {
       toast.success("Registration successful");
-      const signinResponse = await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-        callbackUrl: '/'
-      });
+      // const signinResponse = await signIn('credentials', {
+      //   email: data.email,
+      //   password: data.password,
+      //   redirect: false,
+      //   callbackUrl: '/'
+      // });
 
-      if (signinResponse?.ok) {
-        // router.push('/');
-        window.location.href = '/';
-      }
-
+      // if (signinResponse?.ok) {
+      //   // router.push('/');
+      //   window.location.href = '/';
+      // }
     } else {
       toast.error("Registration failed")
     }
