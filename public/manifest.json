@@ -1,8 +1,8 @@
 {
   "id": "1",
-  "name": "Attendence Calculator",
-  "short_name": "Attendence",
-  "description": "This calculates your attendence",
+  "name": "Attendance Calculator",
+  "short_name": "Attendance",
+  "description": "This calculates your attendance",
   "icons": [
     {
       "src": "./logo72x72.png",

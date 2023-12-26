@@ -30,7 +30,7 @@ const CurrentAttendence = (
       <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
       <div>
         <div className=' flex items-center justify-between' >
-          <label className="text-base font-semibold mr-2 ">Required Attendence</label>
+          <label className="text-base font-semibold mr-2 ">Required Attendance</label>
           <input type="number" value={requiredAttendence} max={Max.toFixed(0)} onChange={(e) => setRequiredAttendence(parseInt(e.target.value))} className="border border-gray-300 rounded-md px-2 w-[100px] text-center" />
         </div>
         {/* <span>%</span> */}
