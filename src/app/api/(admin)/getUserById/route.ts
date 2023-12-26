@@ -18,10 +18,31 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
+  if(currentUser.role==="owner"){
+    const user = await db.user.findUnique({
+      where: {
+        id: body.id,
+      }
+    });
+    return NextResponse.json(user);
+  }
+
   if (access) {
     const user = await db.user.findUnique({
       where: {
         id: body.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        emailVerified: true,
+        image: true,
+        role: true,
+        organisation: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
     return NextResponse.json(user);
