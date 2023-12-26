@@ -28,8 +28,8 @@ export async function POST(req: Request) {
         role: "deleted",
       },
     });
-    const { id: userId, ...rest } = user;
-    const deleted = { userId, ...rest };
+    const { id, ...rest } = user;
+    const deleted = { userId: id, ...rest };
     const deletedUser = await db.deletedUsers.create({
       data: {
         ...deleted,

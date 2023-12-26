@@ -39,7 +39,7 @@ model User {
 
 model DeletedUsers {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId           String    @db.ObjectId
+  userId           String?    
   name             String?
   username         String?
   email            String?
@@ -49,10 +49,10 @@ model DeletedUsers {
   password         String?
   role             Role?
   organisation     String?
-  createdAt        DateTime
-  updatedAt        DateTime
-  classesData      Json
-  isNew            Boolean
+  createdAt        DateTime?
+  updatedAt        DateTime?
+  classesData      Json?
+  isNew            Boolean?
   account          Account[]
   session          Session[]
   deletedAt        DateTime  @default(now())
