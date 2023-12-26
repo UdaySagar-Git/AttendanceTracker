@@ -10,7 +10,7 @@ const page = async () => {
   if (currentUser) {
     redirect('/')
   }
-  if (currentUser.role === 'admin') {
+  if (currentUser.role === 'admin' || currentUser.role === 'owner') {
     return (
       <SignUp />
     )

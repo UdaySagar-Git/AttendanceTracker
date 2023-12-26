@@ -9,11 +9,13 @@ export async function GET(req: Request) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (currentUser.role !== "admin") {
+  const access = currentUser.role === "admin" || currentUser.role === "owner";
+
+  if (!access) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (currentUser.role === "admin") {
+  if (access) {
     const users = await db.user.findMany({});
     return NextResponse.json(users);
   }

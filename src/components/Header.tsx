@@ -13,6 +13,8 @@ interface Props {
 
 const Header: React.FC<Props> = ({ currentUser }) => {
 
+  const access = currentUser?.role === 'admin' || currentUser?.role === 'owner'
+
   return (
 
     <div className='shadow-md px-2 bg-white z-10 sticky top-0'>
@@ -29,14 +31,13 @@ const Header: React.FC<Props> = ({ currentUser }) => {
         </Link>
 
         <div className='flex gap-3'>
-          {
-            currentUser?.role === 'admin' && (
-              <Link href='/admin'>
-                <button className='bg-red-500 hover:bg-red-800 text-white text-sm font-semibold py-2 px-3  rounded-lg ' >
-                  Admin
-                </button>
-              </Link>
-            )
+          {access && (
+            <Link href='/admin'>
+              <button className='bg-red-500 hover:bg-red-800 text-white text-sm font-semibold py-2 px-3  rounded-lg ' >
+                {currentUser?.role === 'admin' ? 'Admin' : 'Owner'}
+              </button>
+            </Link>
+          )
           }
           <Link href="/profile">
             {!currentUser?.password ? (

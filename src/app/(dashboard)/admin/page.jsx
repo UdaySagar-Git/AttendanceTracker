@@ -7,12 +7,13 @@ const page = async () => {
   if (!currentUser) {
     redirect('/signin');
   }
-  if (currentUser?.role !== 'admin') {
+  const access = currentUser?.role == 'admin' || currentUser?.role == 'owner'
+  if (!access) {
     redirect('/');
     return <div>Unauthorized</div>
   }
-  if (currentUser?.role === 'admin') {
-    return <UserDetails />
+  if (access) {
+    return <UserDetails role={currentUser.role} />
   }
   return (
     <div>something went wrong</div>

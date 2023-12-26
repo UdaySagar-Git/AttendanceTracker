@@ -11,15 +11,16 @@ export async function POST(req: Request) {
   if (!currentUser) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
+  
 
-  if (currentUser.role !== "admin") {
+  if (currentUser.role !== "owner") {
     return NextResponse.json(
       { message: "You are not allowed to do this." },
       { status: 401 }
     );
   }
 
-  if (currentUser.role === "admin") {
+  if (currentUser.role === "owner") {
     const user = await db.user.update({
       where: {
         id: body.id,

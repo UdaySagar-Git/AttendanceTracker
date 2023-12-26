@@ -63,9 +63,9 @@ const SignIn = () => {
         </div>
         <SigninWithGoogle />
 
-        <p className="text-center mt-4">
+        {/* <p className="text-center mt-4">
           Don&apos;t have an account? <Link href="/signup" className="text-blue-500">Sign Up</Link>
-        </p>
+        </p> */}
       </form>
     </div>
   );

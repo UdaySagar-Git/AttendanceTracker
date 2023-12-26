@@ -5,7 +5,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 export async function POST(req: Request) {
   const body = await req.json();
   console.log(body);
-  
+
   const { id, createdAt, updatedAt, password, ...rest } = body;
   const currentUser = await getCurrentUser();
 
@@ -13,11 +13,11 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (currentUser.role !== "admin") {
+  if (currentUser.role !== "owner") {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (currentUser.role === "admin") {
+  if (currentUser.role === "owner") {
     const user = await db.user.update({
       where: {
         id: body.id,
