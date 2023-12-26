@@ -9,9 +9,8 @@ export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/signin", req.url));
   }
-  
 
   if (currentUser.role !== "owner") {
     return NextResponse.json(
@@ -29,9 +28,11 @@ export async function POST(req: Request) {
         role: "deleted",
       },
     });
+    const { id: userId, ...rest } = user;
+    const deleted = { userId, ...rest };
     const deletedUser = await db.deletedUsers.create({
       data: {
-        ...user,
+        ...deleted,
       },
     });
     await db.user.delete({

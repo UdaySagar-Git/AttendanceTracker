@@ -7,8 +7,10 @@ import SignoutButton from './SignoutButton';
 import { User } from '@prisma/client';
 import { IoHome } from "react-icons/io5";
 
+type newUser = Omit<User, 'UnhashedPassword'>
+
 interface Props {
-  currentUser?: User | null;
+  currentUser?: newUser | null;
 }
 
 const Header: React.FC<Props> = ({ currentUser }) => {

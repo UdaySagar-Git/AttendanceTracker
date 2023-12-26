@@ -4,13 +4,13 @@ import getCurrentUser from "@/actions/getCurrentUser";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  console.log(body);
+  // console.log(body);
 
   const { id, createdAt, updatedAt, password, ...rest } = body;
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/signin", req.url));
   }
 
   if (currentUser.role !== "owner") {

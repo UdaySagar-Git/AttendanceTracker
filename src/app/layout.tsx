@@ -4,9 +4,7 @@ import '@/styles/globals.css'
 import Header from '../components/Header'
 import getCurrentUser from '@/actions/getCurrentUser'
 import ToasterProvider from '@/components/ToasterProvider'
-import { SessionProvider } from 'next-auth/react'
 import AuthProvider from '@/providers/AuthProvider'
-import { redirect } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

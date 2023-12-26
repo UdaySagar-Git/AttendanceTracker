@@ -39,6 +39,7 @@ model User {
 
 model DeletedUsers {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String    @db.ObjectId
   name             String?
   username         String?
   email            String?
@@ -50,6 +51,10 @@ model DeletedUsers {
   organisation     String?
   createdAt        DateTime
   updatedAt        DateTime
+  classesData      Json
+  isNew            Boolean
+  account          Account[]
+  session          Session[]
   deletedAt        DateTime  @default(now())
 }
 
@@ -67,7 +72,9 @@ model Account {
   session_state     String?
   expires_at        Int?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
+  deletedUsersId String?       @db.ObjectId
 
   @@unique([provider, providerAccountId])
 }
@@ -78,7 +85,9 @@ model Session {
   userId       String   @db.ObjectId
   expires      DateTime
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
+  deletedUsersId String?       @db.ObjectId
 }
 
 model VerificationRequest {

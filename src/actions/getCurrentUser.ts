@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 
-import  authOptions  from "@/libs/authOptions";
+import authOptions from "@/libs/authOptions";
 
 import prisma from "@/libs/db";
 
@@ -24,10 +24,12 @@ export default async function getCurrentUser() {
       throw new Error("Not signed in");
     }
 
-    // const { UnhashedPassword, ...rest } = currentUser;
+    const { UnhashedPassword, ...rest } = currentUser;
 
     // const currentUserDetails = rest;
-    return currentUser;
+
+    return rest;
+    
   } catch (error: any) {
     return null;
   }

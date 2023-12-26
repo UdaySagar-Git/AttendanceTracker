@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/signin", req.url));
   }
 
   const access = currentUser.role === "admin" || currentUser.role === "owner";

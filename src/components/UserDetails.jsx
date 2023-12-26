@@ -3,17 +3,23 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const UserDetails = ({ role }) => {
   const [users, setUsers] = useState([]);
   const [deletedUsers, setDeletedUsers] = useState([]);
+
   useEffect(() => {
     fetch('/api/userDetails')
       .then(res => res.json())
-      .then(data => setUsers(data));
-    fetch('/api/deletedUsers')
-      .then(res => res.json())
-      .then(data => setDeletedUsers(data));
+      .then(data => setUsers(data))
+      .catch(err => toast.error(err.message));
+    if (role === "owner") {
+      fetch('/api/deletedUsers')
+        .then(res => res.json())
+        .then(data => setDeletedUsers(data))
+        .catch(err => toast.error(err.message));
+    }
   }, []);
 
 
