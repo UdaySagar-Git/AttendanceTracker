@@ -22,7 +22,7 @@ const SignUp = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, email: email.toLowerCase(), username: username.toLowerCase() }),
     });
 
     if (response.ok) {

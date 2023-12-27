@@ -20,6 +20,13 @@ const authOptions: AuthOptions = {
   },
   providers: [
     GoogleProvider({
+      profile(profile) {
+        // console.log(profile);
+        return {
+          ...profile,
+          role: profile.role ?? "user",
+        };
+      },
       clientId: process.env.NEXTAUTH_GOOGLE_ID as string,
       clientSecret: process.env.NEXTAUTH_GOOGLE_SECRET as string,
     }),
@@ -46,56 +53,28 @@ const authOptions: AuthOptions = {
         }
 
         if (user && (await bcrypt.compare(password, user.password!))) {
-          return user;
+          return {
+            ...user,
+            role: user.role ?? ""
+          };
         } else {
           return null;
         }
       },
     }),
   ],
-  // callbacks: {
-  //   async afterCallback(_, __, profile) {
-  //     // Use the user's email to find and include the data
-  //     const user = await prisma.user.findUnique({
-  //       where: { email: profile.email },
-  //       include: { data: true },
-  //     });
 
-  //     // Update the user object with the included data
-  //     profile.data = user?.data || null;
-
-  //     return Promise.resolve(true);
-  //   },
-  // },
   callbacks: {
-    async signIn({ account, profile, email, credentials }) {
-      const isAllowedToSignIn = true;
-      if (isAllowedToSignIn) {
-        return true;
-      } else {
-        // Return false to display a default error message
-        return false;
-        // Or you can return a URL to redirect to:
-        // return '/unauthorized'
-      }
+    async jwt({ token, user }) {
+      if(user) token.role = user.role;
+      return token;
+    },
+    //for client side
+    async session({ session, token }) {
+      if(session?.user) session.user.role = token.role;
+      return session;
     },
   },
-
-  // callbacks: {
-  //   async session({ session, user, token }) {
-  //     console.log("session", session);
-  //     console.log("user", user);
-  //     console.log("token", token);
-  //     return session;
-  //   },
-  //   async jwt({ token, user, account, profile, isNewUser }) {
-  //     console.log("token", token);
-  //     console.log("user", user);
-  //     console.log("account", account);
-  //     console.log("profile", profile);
-  //     return token;
-  //   },
-  // },
 };
 
 export default authOptions;

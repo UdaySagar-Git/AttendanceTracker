@@ -4,8 +4,6 @@ import { signIn } from "next-auth/react";
 import SigninWithGoogle from "@/components/SigninWithGoogle";
 import { toast } from "react-hot-toast";
 import { FieldValues, useForm } from "react-hook-form";
-import Link from "next/link";
-
 
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -13,7 +11,7 @@ const SignIn = () => {
   const onSubmit = async (data: FieldValues) => {
     try {
       const response = await signIn('credentials', {
-        email: data.email,
+        email: data.email.toLowerCase(),
         password: data.password,
         redirect: false,
         // callbackUrl: '/'
