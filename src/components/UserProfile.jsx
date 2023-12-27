@@ -28,9 +28,10 @@ const UserProfile = ({ currentUser, access }) => {
   return (
     <div className=''>
       <div className='flex gap-3 items-center '>
-        <div
-          onClick={handleFeaturesToggle}
-          className={`
+        {currentUser?.isBeta &&
+          <div
+            onClick={handleFeaturesToggle}
+            className={`
         text-sm
         font-semibold
         py-2
@@ -44,9 +45,9 @@ const UserProfile = ({ currentUser, access }) => {
         border-slate-200
         ${featuresModel.isOpen && "border-2 bg-slate-200"}
     `}
-        >
-          Features
-        </div>
+          >
+            Features
+          </div>}
         <div
           onClick={toggleOpen}
           className='relative px-2 py-1 border-[1px] border-neutral-200 flex items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
