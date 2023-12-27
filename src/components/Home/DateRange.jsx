@@ -23,37 +23,74 @@ const DateRange = ({ dateRange, setDateRange }) => {
     ].join('-');
   }
 
+  const isEndOfThisMonth = () => {
+    const date = new Date();
+    const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return [
+      lastDayOfMonth.getFullYear(),
+      padTo2Digits(lastDayOfMonth.getMonth() + 1),
+      padTo2Digits(lastDayOfMonth.getDate()),
+    ].join('-');
+  }
+
+  //todo : change this to sem end date from db
+
+  const isSemEnd = () => {
+    return "2024-01-06"
+  }
+
   return (
-    <div className="date-range flex flex-col">
-      <div className="mb-4 w-[280px] flex items-center justify-between">
-        <div className='flex flex-col justify-start'>
-          <label className="font-semibold mr-3">Start Date</label>
-          {
-            dateRange.startDate === isToday() && (
-              <p className="text-black text-sm">(today)</p>
-            )
-          }
-          {
-            dateRange.startDate === isTommorow() && (
-              <p className="text-black text-sm">(tomorrow)</p>
-            )
-          }
+    <div className="date-range flex flex-col ">
+      <div className="mb-4 max-w-[280px] flex justify-between ">
+        <label className="font-semibold mr-2 md:mr-7 mt-2">Start Date :</label>
+        <div>
+
+          <input
+            type="date"
+            value={dateRange.startDate}
+            onChange={(e) => setDateRange({ ...dateRange, startDate: e.target.value })}
+            className="border border-gray-300 rounded-md px-2"
+          />
+          <div className='flex  mt-2 gap-2'>
+            <button
+              onClick={() => setDateRange({ ...dateRange, startDate: isToday() })}
+              className={dateRange.startDate === isToday() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+            >
+              Today
+            </button>
+            <button
+              onClick={() => setDateRange({ ...dateRange, startDate: isTommorow() })}
+              className={dateRange.startDate === isTommorow() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+            >
+              Tomorrow
+            </button>
+          </div>
         </div>
-        <input
-          type="date"
-          value={dateRange.startDate}
-          onChange={(e) => setDateRange({ ...dateRange, startDate: e.target.value })}
-          className="border border-gray-300 rounded-md px-2"
-        />
       </div>
-      <div className="mb-4 w-[280px] flex items-center justify-between">
-        <label className="font-semibold mr-3">End Date</label>
-        <input
-          type="date"
-          required
-          onChange={(e) => setDateRange({ ...dateRange, endDate: e.target.value })}
-          className="border border-gray-300 rounded-md px-2"
-        />
+      <div className="mb-4 max-w-[280px] flex justify-between ">
+        <label className="font-semibold mr-2 md:mr-7 mt-2">End Date :</label>
+        <div>
+          <input
+            type="date"
+            value={dateRange.endDate}
+            onChange={(e) => setDateRange({ ...dateRange, endDate: e.target.value })}
+            className="border border-gray-300 rounded-md px-2"
+          />
+          <div className='flex  mt-2 gap-2'>
+            <button
+              onClick={() => setDateRange({ ...dateRange, endDate: isEndOfThisMonth() })}
+              className={dateRange.endDate === isEndOfThisMonth() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+            >
+              Month End
+            </button>
+            <button
+              onClick={() => setDateRange({ ...dateRange, endDate: isSemEnd() })}
+              className={dateRange.endDate === isSemEnd() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+            >
+              Sem End
+            </button>
+          </div>
+        </div>
       </div>
       {dateRange.endDate === null && (
         <p className="text-red-500 text-xs">* please select end date</p>

@@ -19,7 +19,7 @@ const FeaturesModel = () => {
       <div
         className="bg-slate-100 rounded-xl w-full h-full overflow-hidden border-2 border-slate-800 shadow-lg max-w-xl "
       >
-        <div className="flex justify-between items-center px-4 py-2 bg-slate-200">
+        <div className="flex justify-between items-center px-4 py-2 bg-slate-300">
           <div className="text-lg font-semibold">Features</div>
           <div
             onClick={onToggle}
@@ -28,9 +28,9 @@ const FeaturesModel = () => {
             <IoMdClose />
           </div>
         </div>
-        <div className="p-2 bg-red-500 text-white text-center">
+        {/* <div className="p-2 bg-red-500 text-white text-center">
           <p>Warning: You are responsible for any misuse of this app. I am not.</p>
-        </div>
+        </div> */}
         <div className="p-4">
           <div className="text-lg font-semibold p-5">
             <ul>
