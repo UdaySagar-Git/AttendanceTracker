@@ -31,7 +31,7 @@ const DateArray = (
       }
       {/* small screen */}
       {dateArray.length > 0 &&
-        <div className="px-2 md:hidden flex justify-around items-center">
+        <div className="px-2 md:hidden flex justify-around items-center ">
           <div className="text-sm font-semibold  flex justify-between ">
             <span className=''>Total Classes</span>
             <span className=''>

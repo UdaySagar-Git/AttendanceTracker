@@ -54,13 +54,13 @@ const DateRange = ({ dateRange, setDateRange }) => {
           <div className='flex  mt-2 gap-2'>
             <button
               onClick={() => setDateRange({ ...dateRange, startDate: isToday() })}
-              className={dateRange.startDate === isToday() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.startDate === isToday() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
             >
               Today
             </button>
             <button
               onClick={() => setDateRange({ ...dateRange, startDate: isTommorow() })}
-              className={dateRange.startDate === isTommorow() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.startDate === isTommorow() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
             >
               Tomorrow
             </button>
@@ -79,13 +79,13 @@ const DateRange = ({ dateRange, setDateRange }) => {
           <div className='flex  mt-2 gap-2'>
             <button
               onClick={() => setDateRange({ ...dateRange, endDate: isEndOfThisMonth() })}
-              className={dateRange.endDate === isEndOfThisMonth() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.endDate === isEndOfThisMonth() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
             >
               Month End
             </button>
             <button
               onClick={() => setDateRange({ ...dateRange, endDate: isSemEnd() })}
-              className={dateRange.endDate === isSemEnd() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.endDate === isSemEnd() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
             >
               Sem End
             </button>

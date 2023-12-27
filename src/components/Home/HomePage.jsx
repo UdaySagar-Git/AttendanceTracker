@@ -228,13 +228,13 @@ function HomePage({ currentUser }) {
   return (
     <div className="flex flex-col md:grid grid-cols-12 h-full mt-4 p-5">
       {/* small devices */}
-      <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center ">
+      <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center  ">
         <ClassesCount classesData={classesData} setClassesData={setClassesData} currentUser={currentUser} />
         {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
       </div>
       {/* large Devices */}
-      <div className="col-span-12  md:col-span-9 md:pr-4">
-        <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl">
+      <div className="col-span-12  md:col-span-9 md:pr-4 ">
+        <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl ">
           <DateRange dateRange={dateRange} setDateRange={setDateRange} />
           <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
           <CurrentAttendence currentAttendence={currentAttendence} setCurrentAttendence={setCurrentAttendence} MaxAttendenceCanSecure={MaxAttendenceCanSecure} setRequiredAttendence={setRequiredAttendence} requiredAttendence={requiredAttendence} />
@@ -249,7 +249,7 @@ function HomePage({ currentUser }) {
           <BunkCount result={result} currentAttendence={currentAttendence} attendCount={attendCount} dateRange={dateRange} />
         </div>
       </div>
-      <div className="hidden md:block col-span-3">
+      <div className="hidden md:block col-span-3 ">
         <ClassesCount classesData={classesData} setClassesData={setClassesData} />
         <HolidaysArray dateArray={dateArray} handleDeleteHoliday={handleDeleteHoliday} holidayArray={holidayArray} setHolidayArray={setHolidayArray} />
       </div>

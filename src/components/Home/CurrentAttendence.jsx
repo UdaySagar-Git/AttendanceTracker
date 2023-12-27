@@ -43,13 +43,13 @@ const CurrentAttendence = (
         }
       </div>
       <div className="flex gap-2 mt-2">
-        <button className={requiredAttendence === 70 ? "border border-gray-300 rounded-md px-3 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(70)}>70</button>
-        <button className={requiredAttendence === 75 ? "border border-gray-300 rounded-md px-3 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(75)}>75</button>
-        <button className={requiredAttendence === 80 ? "border border-gray-300 rounded-md px-3 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(80)}>80</button>
-        <button className={requiredAttendence === 85 ? "border border-gray-300 rounded-md px-3 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(85)}>85</button>
-        <button className={requiredAttendence === 90 ? "border border-gray-300 rounded-md px-3 text-sm bg-gray-300" : "border border-gray-300 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(90)}>90</button>
-        <button className="border border-gray-300 rounded-md px-2 text-sm bg-gray-200" onClick={() => handleButtonClick(requiredAttendence - 1)}>-1</button>
-        <button className="border border-gray-300 rounded-md px-2 text-sm bg-gray-200" onClick={() => handleButtonClick(requiredAttendence + 1)}>+1</button>
+        <button className={requiredAttendence === 70 ? "border border-gray-200 rounded-md px-3 text-sm bg-gray-200" : "border border-gray-200 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(70)}>70</button>
+        <button className={requiredAttendence === 75 ? "border border-gray-200 rounded-md px-3 text-sm bg-gray-200" : "border border-gray-200 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(75)}>75</button>
+        <button className={requiredAttendence === 80 ? "border border-gray-200 rounded-md px-3 text-sm bg-gray-200" : "border border-gray-200 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(80)}>80</button>
+        <button className={requiredAttendence === 85 ? "border border-gray-200 rounded-md px-3 text-sm bg-gray-200" : "border border-gray-200 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(85)}>85</button>
+        <button className={requiredAttendence === 90 ? "border border-gray-200 rounded-md px-3 text-sm bg-gray-200" : "border border-gray-200 rounded-md px-3 text-sm"} onClick={() => handleButtonClick(90)}>90</button>
+        <button className="border border-gray-300 rounded-md px-2 text-sm bg-gray-300" onClick={() => handleButtonClick(requiredAttendence - 1)}>-1</button>
+        <button className="border border-gray-300 rounded-md px-2 text-sm bg-gray-300" onClick={() => handleButtonClick(requiredAttendence + 1)}>+1</button>
       </div>
     </div>
   )
