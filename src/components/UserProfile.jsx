@@ -18,12 +18,19 @@ const UserProfile = ({ currentUser, access }) => {
     setIsOpen(prev => !prev);
 
   }, [])
+  const handleFeaturesToggle = () => {
+    if (featuresModel.isOpen) {
+      featuresModel.onClose()
+    } else {
+      featuresModel.onOpen()
+    }
+  }
   return (
     <div className=''>
       <div className='flex gap-3 items-center '>
         <div
-          onClick={() => { featuresModel.onOpen() }}
-          className='
+          onClick={handleFeaturesToggle}
+          className={`
         text-sm
         font-semibold
         py-2
@@ -35,8 +42,8 @@ const UserProfile = ({ currentUser, access }) => {
         cursor-pointer
         border
         border-slate-200
-
-    '
+        ${featuresModel.isOpen && "border-2 bg-slate-200"}
+    `}
         >
           Features
         </div>

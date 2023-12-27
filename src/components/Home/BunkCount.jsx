@@ -10,6 +10,7 @@ const BunkCount = (
   }
 ) => {
   return (
+    // currentAttendence.attended != null && currentAttendence.total != null && currentAttendence.attended != NaN && currentAttendence.total != null &&
     <div className="flex flex-col justify-center mt-5">
       <div className="text-center">
         <h1 className="text-base md:text-xl">If you won&apos;t skip any class then your attendance will be</h1>

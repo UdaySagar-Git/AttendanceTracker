@@ -33,7 +33,10 @@ export default async function RootLayout({
             <ToasterProvider />
           </div>
           {currentUser && <Header currentUser={currentUser} />}
+          {/* <div className='fixed h-full w-full'> */}
+
           <FeaturesModel />
+          {/* </div> */}
           {children}
         </body>
       </html>

@@ -13,8 +13,9 @@ const FeaturesModel = () => {
   return (
     featuresModel.isOpen &&
     <div
-      className="flex justify-center items-center fixed p-2 w-full h-full bg-black bg-opacity-50 z-50"
+      className="flex justify-center items-center p-2 w-full h-full bg-black bg-opacity-50 z-50"
     >
+      {/* add fixed */}
       <div
         className="bg-slate-100 rounded-xl w-full h-full overflow-hidden border-2 border-slate-800 shadow-lg max-w-xl "
       >
@@ -28,7 +29,7 @@ const FeaturesModel = () => {
           </div>
         </div>
         <div className="p-2 bg-red-500 text-white text-center">
-            <p>Warning: You are responsible for any misuse of this app. I am not.</p>
+          <p>Warning: You are responsible for any misuse of this app. I am not.</p>
         </div>
         <div className="p-4">
           <div className="text-lg font-semibold p-5">

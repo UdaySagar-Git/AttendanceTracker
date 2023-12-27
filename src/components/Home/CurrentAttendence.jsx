@@ -5,7 +5,7 @@ const CurrentAttendence = (
 ) => {
   const Max = +(MaxAttendenceCanSecure)
   return (
-    <div className="current-attendence flex flex-col max-w-full sm:w-auto ">
+    <div className=" flex flex-col max-w-full sm:w-auto ">
       <div className='' >
         <div className="mb-4 flex items-center justify-between">
           <label className="text-base font-semibold mr-2 ">Attended Classes</label>
