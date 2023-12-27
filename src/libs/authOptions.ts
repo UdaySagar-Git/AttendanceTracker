@@ -20,13 +20,6 @@ const authOptions: AuthOptions = {
   },
   providers: [
     GoogleProvider({
-      profile(profile) {
-        // console.log(profile);
-        return {
-          ...profile,
-          role: profile.role ?? "user",
-        };
-      },
       clientId: process.env.NEXTAUTH_GOOGLE_ID as string,
       clientSecret: process.env.NEXTAUTH_GOOGLE_SECRET as string,
     }),
@@ -53,10 +46,7 @@ const authOptions: AuthOptions = {
         }
 
         if (user && (await bcrypt.compare(password, user.password!))) {
-          return {
-            ...user,
-            role: user.role ?? ""
-          };
+          return user;
         } else {
           return null;
         }
@@ -64,17 +54,17 @@ const authOptions: AuthOptions = {
     }),
   ],
 
-  callbacks: {
-    async jwt({ token, user }) {
-      if(user) token.role = user.role;
-      return token;
-    },
-    //for client side
-    async session({ session, token }) {
-      if(session?.user) session.user.role = token.role;
-      return session;
-    },
-  },
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     if(user) token.role = user.role;
+  //     return token;
+  //   },
+  //   //for client side
+  //   async session({ session, token }) {
+  //     if(session?.user) session.user.role = token.role;
+  //     return session;
+  //   },
+  // },
 };
 
 export default authOptions;
