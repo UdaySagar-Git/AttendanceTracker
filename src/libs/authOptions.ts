@@ -7,14 +7,14 @@ import prisma from "@/libs/db";
 
 const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
-  debug: process.env.NODE_ENV === "development",
+  // debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
   jwt: {
-    secret: process.env.NEXTAUTH_JWT_SECRET,
+    secret: process.env.NEXTAUTH_JWT_SECRET as string,
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET as string,
   pages: {
     signIn: "/signin",
   },
