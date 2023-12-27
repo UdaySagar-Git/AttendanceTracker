@@ -3,6 +3,7 @@ import getCurrentUser from "@/actions/getCurrentUser"
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import HomePage from "@/components/Home/HomePage";
+import UnauthorizedPage from "../components/UnauthorizedPage";
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
@@ -12,7 +13,13 @@ export default async function Home() {
     // setTimeout(() => redirect('/signin'), 200)
     redirect('/signin')
   }
+  const noaccess = currentUser?.role == "disabled" || currentUser?.isBeta == false
 
+  if (noaccess) {
+    return (
+      <UnauthorizedPage />
+    )
+  }
 
   if (!currentUser?.email) {
     return (

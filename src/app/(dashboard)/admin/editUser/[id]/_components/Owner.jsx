@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 const Page = ({ params }) => {
 
   const [user, setUser] = useState("...fetching user");
-  
+
   const router = useRouter();
   useEffect(() => {
     const getUser = async () => {
@@ -95,6 +95,15 @@ const Page = ({ params }) => {
               onChange={(event) => setUser({ ...user, username: event.target.value })}
               className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
             />
+            <div>
+              <label className="text-sm text-gray-600">Is Beta:</label>
+              <input
+                type="checkbox"
+                checked={user?.isBeta}
+                onChange={(event) => setUser({ ...user, isBeta: event.target.checked })}
+                className="ml-2"
+              />
+            </div>
             <label className="text-sm text-gray-600">Created At:</label>
             <input
               type="text"

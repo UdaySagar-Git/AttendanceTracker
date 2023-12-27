@@ -30,6 +30,26 @@ const Page = ({ params }) => {
     getUser();
   }, []);
 
+  const handleUpdateBeta = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/updateBetaUser/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+      const userData = await response.json();
+      toast.success("User updated successfully");
+      router.push('/admin');
+    } catch (error) {
+      // console.log(error)
+      toast.error(error.message);
+    }
+  }
+
   return (
     <div className="flex flex-col sm:grid grid-cols-3 gap-4 p-10">
       <div className="col-span-1">
@@ -43,6 +63,15 @@ const Page = ({ params }) => {
             className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
           />
           <div className="mt-4">
+            <label className="block mb-2 text-sm ">Is Beta:
+              <input
+                type="checkbox"
+                checked={user?.isBeta}
+                onChange={(event) => setUser({ ...user, isBeta: event.target.checked })}
+                className="ml-2"
+              />
+              <button onClick={handleUpdateBeta} className='bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold py-1 px-3 mx-4 rounded-lg'>save</button>
+            </label>
             <label className="text-sm text-gray-600">ID:</label>
             <input
               type="text"
@@ -103,6 +132,7 @@ const Page = ({ params }) => {
               className="ml-2"
             />
           </label>
+
           {/* <div>
             <label className="block mb-2 text-sm">
               Password:

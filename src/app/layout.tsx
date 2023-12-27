@@ -6,6 +6,7 @@ import getCurrentUser from '@/actions/getCurrentUser'
 import ToasterProvider from '@/components/ToasterProvider'
 import AuthProvider from '@/providers/AuthProvider'
 import FeaturesModel from '@/models/FeaturesModel'
+import UnauthorizedPage from '../components/UnauthorizedPage'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default async function RootLayout({
 }) {
   const currentUser = await getCurrentUser();
 
+
   return (
     <AuthProvider>
       <html lang="en">
@@ -34,7 +36,6 @@ export default async function RootLayout({
           </div>
           {currentUser && <Header currentUser={currentUser} />}
           {/* <div className='fixed h-full w-full'> */}
-
           <FeaturesModel />
           {/* </div> */}
           {children}

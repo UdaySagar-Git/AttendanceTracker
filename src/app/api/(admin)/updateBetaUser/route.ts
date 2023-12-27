@@ -2,24 +2,28 @@ import { NextResponse } from "next/server";
 import { db } from "@/libs/db";
 import getCurrentUser from "@/actions/getCurrentUser";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
+  const body = await req.json();
+  // console.log(body);
+
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  const access = currentUser.role === "admin" || currentUser.role === "owner";
-
-  if (!access) {
+  if (currentUser.role !== "admin") {
     return NextResponse.redirect(new URL("/", req.url));
   }
-  if (currentUser.role === "owner") {
-    const users = await db.user.findMany({});
-    return NextResponse.json(users);
-  }
-  if (access) {
-    const users = await db.user.findMany({
+
+  if (currentUser.role === "admin") {
+    const user = await db.user.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        isBeta: body.isBeta,
+      },
       select: {
         id: true,
         name: true,
@@ -34,6 +38,6 @@ export async function GET(req: Request) {
         updatedAt: true,
       },
     });
-    return NextResponse.json(users);
+    return NextResponse.json(user);
   }
 }

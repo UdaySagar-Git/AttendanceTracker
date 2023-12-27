@@ -40,6 +40,7 @@ export async function POST(req: Request) {
         emailVerified: true,
         image: true,
         role: true,
+        isBeta: true,
         organisation: true,
         createdAt: true,
         updatedAt: true,

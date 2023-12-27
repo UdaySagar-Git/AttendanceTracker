@@ -33,6 +33,7 @@ model User {
   updatedAt        DateTime  @updatedAt
   classesData      Json      @default("{ \"Mon\": \"6\" , \"Tue\": \"6\" , \"Wed\": \"6\" , \"Thu\": \"6\" , \"Fri\": \"6\" , \"Sat\": \"6\" , \"Sun\": \"0\" }")
   isNew            Boolean   @default(true)
+  isBeta           Boolean   @default(false)
   account          Account[]
   session          Session[]
 }
