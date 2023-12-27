@@ -15,7 +15,14 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-},
-}
+  },
+  images: {
+    domains: [
+      "res.cloudinary.com",
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+    ],
+  },
+};
 
-module.exports =  withPWA(nextConfig)
+module.exports = withPWA(nextConfig);
