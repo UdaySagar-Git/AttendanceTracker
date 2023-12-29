@@ -21,6 +21,8 @@ const nextConfig = {
       "res.cloudinary.com",
       "avatars.githubusercontent.com",
       "lh3.googleusercontent.com",
+      "mediopinions.com",
+      "www.mediopinions.com",
     ],
   },
 };
