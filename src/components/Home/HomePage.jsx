@@ -18,12 +18,12 @@ function HomePage({ currentUser }) {
   const featuresModel = useFeaturesModel();
 
   const handleClose = () => {
-    if(profileModel.isOpen)
+    if (profileModel.isOpen)
       profileModel.onClose();
-    if(featuresModel.isOpen)
+    if (featuresModel.isOpen)
       featuresModel.onClose()
   };
-  
+
   function padTo2Digits(num) {
     return num.toString().padStart(2, "0");
   }
@@ -145,7 +145,7 @@ function HomePage({ currentUser }) {
     setMaxAttendenceCanSecure(
       ((currentAttendence.attended + attendCount.totalWillAttendedClasses) *
         100) /
-        (currentAttendence.total + attendCount.totalClassesTillEndDate)
+      (currentAttendence.total + attendCount.totalClassesTillEndDate)
     );
   }, [currentAttendence, attendCount]);
 
@@ -265,9 +265,9 @@ function HomePage({ currentUser }) {
 
     const ClassesCanSkip = parseInt(
       attendCount.totalWillAttendedClasses -
-        ((currentAttendence.total + attendCount.totalClassesTillEndDate) *
-          (requiredAttendence / 100) -
-          currentAttendence.attended)
+      ((currentAttendence.total + attendCount.totalClassesTillEndDate) *
+        (requiredAttendence / 100) -
+        currentAttendence.attended)
     );
 
     setResult(ClassesCanSkip);
@@ -282,7 +282,7 @@ function HomePage({ currentUser }) {
   return (
     <div
       className="flex flex-col md:grid grid-cols-12 h-full mt-4 p-5"
-      onClick={ handleClose }
+      onClick={handleClose}
     >
       {/* small devices */}
       <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center  ">
@@ -322,6 +322,8 @@ function HomePage({ currentUser }) {
             <div className=" md:hidden flex pb-5 mt-4 gap-5 items-center flex-wrap justify-center ">
               {/* <ClassesCount classesData={classesData} setClassesData={setClassesData} /> */}
               <HolidaysArray
+                dateRange={dateRange}
+
                 dateArray={dateArray}
                 handleDeleteHoliday={handleDeleteHoliday}
                 holidayArray={holidayArray}
@@ -343,6 +345,7 @@ function HomePage({ currentUser }) {
           setClassesData={setClassesData}
         />
         <HolidaysArray
+          dateRange={dateRange}
           dateArray={dateArray}
           handleDeleteHoliday={handleDeleteHoliday}
           holidayArray={holidayArray}

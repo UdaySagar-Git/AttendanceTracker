@@ -34,13 +34,22 @@ model User {
   classesData      Json      @default("{ \"Mon\": \"6\" , \"Tue\": \"6\" , \"Wed\": \"6\" , \"Thu\": \"6\" , \"Fri\": \"6\" , \"Sat\": \"6\" , \"Sun\": \"0\" }")
   isNew            Boolean   @default(true)
   isBeta           Boolean   @default(false)
+  holidays         Json[]    
   account          Account[]
   session          Session[]
 }
 
+// model Holiday {
+//   id     String   @id @default(auto()) @map("_id") @db.ObjectId
+//   userId String?  @unique @db.ObjectId
+//   Date   String[]
+//   title  String?
+//   User   User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
+
 model DeletedUsers {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId           String?    
+  userId           String?
   name             String?
   username         String?
   email            String?
@@ -81,11 +90,10 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
-  expires      DateTime
-
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken   String        @unique
+  userId         String        @db.ObjectId
+  expires        DateTime
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
   deletedUsersId String?       @db.ObjectId
