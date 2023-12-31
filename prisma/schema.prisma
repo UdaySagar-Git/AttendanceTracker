@@ -34,7 +34,8 @@ model User {
   classesData      Json      @default("{ \"Mon\": \"6\" , \"Tue\": \"6\" , \"Wed\": \"6\" , \"Thu\": \"6\" , \"Fri\": \"6\" , \"Sat\": \"6\" , \"Sun\": \"0\" }")
   isNew            Boolean   @default(true)
   isBeta           Boolean   @default(false)
-  holidays         Json[]    
+  semEndDate       String?
+  holidays         Json[]    @default([])
   account          Account[]
   session          Session[]
 }

@@ -19,19 +19,18 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
     // console.log(newHoliday); //2023-12-29
     // console.log(dateRange); //{ "startDate": "2024-01-01", "endDate": "2024-01-07" }
 
-    const startDate = new Date(dateRange.startDate);
-    const endDate = new Date(dateRange.endDate);
+    // const startDate = new Date(dateRange.startDate);
+    // const endDate = new Date(dateRange.endDate);
 
-    if (currentDate < startDate || currentDate > endDate) {
-      alert('Please select a date within the date range');
-      return;
-    }
-
+    // if (currentDate < startDate || currentDate > endDate) {
+    //   alert('Please select a date within the date range');
+    //   return;
+    // }
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const dayOfWeek = daysOfWeek[currentDate.getDay()];
     const tempResultArray = [...holidayArray];
-    tempResultArray.push({
+    const newHolidayDate = {
       Date: [
         currentDate.getDate(),
         currentDate.getMonth() + 1,
@@ -39,15 +38,23 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
         dayOfWeek
       ],
       title: "Holiday"
-    });
+    }
 
+    //check if this new holiday already exists
+    const existingHoliday = holidayArray.find(holiday => holiday.Date[0] === newHolidayDate.Date[0] && holiday.Date[1] === newHolidayDate.Date[1] && holiday.Date[2] === newHolidayDate.Date[2]);
+    if (existingHoliday) {
+      alert('This date already exists');
+      return;
+    }
+
+    tempResultArray.push(newHolidayDate)
     setHolidayArray(tempResultArray);
     setNewHoliday('');
   };
 
 
   return (
-    <div className="md:mt-10 w-full flex flex-col gap-4">
+    <div className="md:mt-8 w-full flex flex-col gap-4">
       <div className='flex flex-wrap justify-center xl:justify-start'>
         <h1 className="text-2xl font-semibold ml-6">Holiday List</h1>
         {!toggle ?
@@ -64,7 +71,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
         }
         <ul className="w-full px-2">
         {
-          holidayArray.length === 0 && <p className='text-center'>No Holidays</p>
+          holidayArray?.length === 0 && <p className='text-center'>No Holidays</p>
         }
           {holidayArray.map((holiday, index) => (
             <li key={index} className="mb-2 flex justify-between">

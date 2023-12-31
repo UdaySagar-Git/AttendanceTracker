@@ -1,11 +1,12 @@
 import React from 'react'
+import { useEffect } from 'react';
 
 const DateArray = (
   {
     dateArray,
     setDateArray,
     attendCount,
-    handleChangeClassCount
+    handleChangeClassCount,
   }
 ) => {
   return (

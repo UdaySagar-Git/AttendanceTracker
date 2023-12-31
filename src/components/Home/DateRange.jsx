@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DateRange = ({ dateRange, setDateRange }) => {
+const DateRange = ({ dateRange, setDateRange,currentUser }) => {
   function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
   }
@@ -36,7 +36,8 @@ const DateRange = ({ dateRange, setDateRange }) => {
   //todo : change this to sem end date from db
 
   const isSemEnd = () => {
-    return "2024-01-06"
+    const endSemDate = (currentUser?.semEndDate )
+    return endSemDate
   }
 
   return (
@@ -92,8 +93,11 @@ const DateRange = ({ dateRange, setDateRange }) => {
           </div>
         </div>
       </div>
-      {dateRange.endDate === null && (
+      { dateRange.endDate=== "" && (
         <p className="text-red-500 text-xs">* please select end date</p>
+      )}
+      {dateRange.endDate < dateRange.startDate && dateRange.endDate!==""  && (
+        <p className="text-red-500 text-xs">* end date should be greater than start date</p>
       )}
     </div>
   );

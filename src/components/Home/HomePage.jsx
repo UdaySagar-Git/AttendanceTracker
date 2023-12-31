@@ -12,6 +12,7 @@ import DateArray from "./DateArray";
 import HolidaysArray from "./HolidaysArray";
 import useProfileModel from "@/hooks/useProfileModel";
 import useFeaturesModel from "@/hooks/useFeaturesModel";
+import EndSemDate from "./EndSemDate";
 
 function HomePage({ currentUser }) {
   const profileModel = useProfileModel();
@@ -58,6 +59,8 @@ function HomePage({ currentUser }) {
     ].join("-");
   }, []);
 
+
+
   // const [currentAttendence, setCurrentAttendence] = useState({ attended: null, total: null });
   // const [classesData, setClassesData] = useState(currentUser.classesData || { Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
   // const [dateRange, setDateRange] = useState({ startDate: formatStartDate(), endDate: null });
@@ -98,7 +101,7 @@ function HomePage({ currentUser }) {
 
   const [holidayArray, setHolidayArray] = useState(() => {
     const storedHolidayArray = localStorage.getItem("holidayArray");
-    return storedHolidayArray ? JSON.parse(storedHolidayArray) : [];
+    return storedHolidayArray ? JSON.parse(storedHolidayArray) : currentUser.holidays;
   });
 
   const [requiredAttendence, setRequiredAttendence] = useState(() => {
@@ -149,37 +152,42 @@ function HomePage({ currentUser }) {
     );
   }, [currentAttendence, attendCount]);
 
+  const generateDateArray = () => {
+    const start = new Date(dateRange.startDate);
+    const end = new Date(dateRange.endDate);
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const tempResultArray = [];
+
+    let currentDate = new Date(start);
+
+    while (currentDate <= end) {
+      const dayOfWeek = daysOfWeek[currentDate.getDay()];
+      const classesCount = holidayArray.some(item =>
+        item.Date[0] === currentDate.getDate() &&
+        item.Date[1] === currentDate.getMonth() + 1 &&
+        item.Date[2] === currentDate.getFullYear()
+      ) ? 0 : classesData[dayOfWeek];
+
+      tempResultArray.push({
+        Date: [
+          currentDate.getDate(),
+          currentDate.getMonth() + 1,
+          currentDate.getFullYear(),
+          dayOfWeek,
+        ],
+        ClassesCount: classesCount,
+        AttendCount: classesCount,
+      });
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    setDateArray(tempResultArray);
+  };
+
   useEffect(() => {
-    const generateDateArray = () => {
-      const start = new Date(dateRange.startDate);
-      const end = new Date(dateRange.endDate);
-      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const tempResultArray = [];
-
-      let currentDate = new Date(start);
-
-      while (currentDate <= end) {
-        const dayOfWeek = daysOfWeek[currentDate.getDay()];
-        const classesCount = classesData[dayOfWeek];
-
-        tempResultArray.push({
-          Date: [
-            currentDate.getDate(),
-            currentDate.getMonth() + 1,
-            currentDate.getFullYear(),
-            dayOfWeek,
-          ],
-          ClassesCount: classesCount,
-          AttendCount: classesCount,
-        });
-
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-
-      setDateArray(tempResultArray);
-    };
     generateDateArray();
-  }, [dateRange, classesData]);
+  }, [dateRange, classesData, holidayArray]);
 
   useEffect(() => {
     // set public holidays ClassesCount to 0
@@ -291,12 +299,13 @@ function HomePage({ currentUser }) {
           setClassesData={setClassesData}
           currentUser={currentUser}
         />
+        <EndSemDate currentUser={currentUser} />
         {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
       </div>
       {/* large Devices */}
       <div className="col-span-12  md:col-span-9 md:pr-4 ">
         <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl ">
-          <DateRange dateRange={dateRange} setDateRange={setDateRange} />
+          <DateRange dateRange={dateRange} setDateRange={setDateRange} currentUser={currentUser} />
           <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
           <CurrentAttendence
             currentAttendence={currentAttendence}
@@ -323,7 +332,6 @@ function HomePage({ currentUser }) {
               {/* <ClassesCount classesData={classesData} setClassesData={setClassesData} /> */}
               <HolidaysArray
                 dateRange={dateRange}
-
                 dateArray={dateArray}
                 handleDeleteHoliday={handleDeleteHoliday}
                 holidayArray={holidayArray}
@@ -340,10 +348,12 @@ function HomePage({ currentUser }) {
         </div>
       </div>
       <div className="hidden md:block col-span-3 ">
+
         <ClassesCount
           classesData={classesData}
           setClassesData={setClassesData}
         />
+        <EndSemDate  currentUser={currentUser} />
         <HolidaysArray
           dateRange={dateRange}
           dateArray={dateArray}
