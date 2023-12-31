@@ -7,17 +7,26 @@ import Image from 'next/image'
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import useFeaturesModel from '@/hooks/useFeaturesModel';
+import useProfileModel from '@/hooks/useProfileModel';
 
 
 const UserProfile = ({ currentUser, access }) => {
 
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
+  const profileModel = useProfileModel()
+  const {isOpen} = profileModel
   const featuresModel = useFeaturesModel();
-  const toggleOpen = useCallback(() => {
-    setIsOpen(prev => !prev);
+  const onToggle = useCallback(() => {
+    // setIsOpen(prev => !prev);
+    if(isOpen){
+      profileModel.onClose()
+    }else{
+      profileModel.onOpen()
+    }
 
-  }, [])
+  },[profileModel])
+  
   const handleFeaturesToggle = () => {
     if (featuresModel.isOpen) {
       featuresModel.onClose()
@@ -49,7 +58,7 @@ const UserProfile = ({ currentUser, access }) => {
             Features
           </div>}
         <div
-          onClick={toggleOpen}
+          onClick={onToggle}
           className='relative px-2 py-1 border-[1px] border-neutral-200 flex items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition'
         >
           <div className=''>
@@ -68,6 +77,7 @@ const UserProfile = ({ currentUser, access }) => {
                 {access && <MenuItem onClick={() => { router.push('/admin') }} label={`${currentUser?.role === 'admin' ? 'Admin' : 'Owner'}`} />}
                 <hr />
                 <MenuItem onClick={() => signOut({ callbackUrl: '/signin' })} label="SignOut" />
+                <MenuItem onClick={()=>{localStorage.clear();}} label="Clear local storage" />
               </>
             </div>
           )}

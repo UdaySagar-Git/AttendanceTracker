@@ -60,31 +60,31 @@ const ClassesCount = (
           <div className="flex mt-4  border shadow-lg border-rose-600 p-3 rounded-xl bg-slate-100 justify-center flex-wrap md:p-1">
             <div className="m-2  w-[25px]">
               <label>Mon</label>
-              <input type="number" className='w-full text-center' value={classesData.Mon} onChange={(e) => setClassesData({ ...classesData, Mon: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Mon} onChange={(e) => setClassesData({ ...classesData, Mon: (e.target.value) })} />
             </div>
             <div className="m-2  w-[25px]">
               <label>Tue</label>
-              <input type="number" className='w-full text-center' value={classesData.Tue} onChange={(e) => setClassesData({ ...classesData, Tue: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Tue} onChange={(e) => setClassesData({ ...classesData, Tue: (e.target.value) })} />
             </div>
             <div className="m-2 w-[25px]">
               <label>Wed</label>
-              <input type="number" className='w-full text-center' value={classesData.Wed} onChange={(e) => setClassesData({ ...classesData, Wed: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Wed} onChange={(e) => setClassesData({ ...classesData, Wed: (e.target.value) })} />
             </div>
             <div className="m-2 w-[25px]">
               <label>Thu</label>
-              <input type="number" className='w-full text-center' value={classesData.Thu} onChange={(e) => setClassesData({ ...classesData, Thu: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Thu} onChange={(e) => setClassesData({ ...classesData, Thu: (e.target.value) })} />
             </div>
             <div className="m-2 w-[25px]">
               <label>Fri</label>
-              <input type="number" className='w-full text-center' value={classesData.Fri} onChange={(e) => setClassesData({ ...classesData, Fri: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Fri} onChange={(e) => setClassesData({ ...classesData, Fri: (e.target.value) })} />
             </div>
             <div className="m-2 w-[25px]">
               <label>Sat</label>
-              <input type="number" className='w-full text-center' value={classesData.Sat} onChange={(e) => setClassesData({ ...classesData, Sat: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Sat} onChange={(e) => setClassesData({ ...classesData, Sat: (e.target.value) })} />
             </div>
             <div className="m-2 w-[25px]">
               <label>Sun</label>
-              <input type="number" className='w-full text-center' value={classesData.Sun} onChange={(e) => setClassesData({ ...classesData, Sun: parseInt(e.target.value) })} />
+              <input type="number" className='w-full text-center' value={classesData.Sun} onChange={(e) => setClassesData({ ...classesData, Sun: (e.target.value) })} />
             </div>
           </div>
       }
