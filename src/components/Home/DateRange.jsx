@@ -40,8 +40,8 @@ const DateRange = ({ dateRange, setDateRange }) => {
   }
 
   return (
-    <div className="date-range flex flex-col ">
-      <div className="mb-4 max-w-[280px] flex justify-between ">
+    <div className="date-range flex flex-col flex-grow md:max-w-max">
+      <div className="mb-4 flex-1 flex justify-around ">
         <label className="text-sm sm:text-base font-semibold mr-2 md:mr-7 mt-2">Start Date :</label>
         <div>
 
@@ -67,7 +67,7 @@ const DateRange = ({ dateRange, setDateRange }) => {
           </div>
         </div>
       </div>
-      <div className="mb-4 max-w-[280px] flex justify-between ">
+      <div className="mb-4 flex-1 flex justify-around ">
         <label className="text-sm sm:text-base font-semibold mr-2 md:mr-7 mt-2">End Date :</label>
         <div>
           <input
