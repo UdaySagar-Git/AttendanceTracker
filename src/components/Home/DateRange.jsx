@@ -42,7 +42,7 @@ const DateRange = ({ dateRange, setDateRange }) => {
   return (
     <div className="date-range flex flex-col ">
       <div className="mb-4 max-w-[280px] flex justify-between ">
-        <label className="font-semibold mr-2 md:mr-7 mt-2">Start Date :</label>
+        <label className="text-sm sm:text-base font-semibold mr-2 md:mr-7 mt-2">Start Date :</label>
         <div>
 
           <input
@@ -51,16 +51,16 @@ const DateRange = ({ dateRange, setDateRange }) => {
             onChange={(e) => setDateRange({ ...dateRange, startDate: e.target.value })}
             className="border border-gray-300 rounded-md px-2"
           />
-          <div className='flex  mt-2 gap-2'>
+          <div className='flex  mt-2 gap-2 flex-grow'>
             <button
               onClick={() => setDateRange({ ...dateRange, startDate: isToday() })}
-              className={dateRange.startDate === isToday() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.startDate === isToday() ? "border border-gray-300 flex-1 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 flex-1 rounded-md px-1 text-sm"}
             >
               Today
             </button>
             <button
               onClick={() => setDateRange({ ...dateRange, startDate: isTommorow() })}
-              className={dateRange.startDate === isTommorow() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.startDate === isTommorow() ? "border border-gray-300 flex-1 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 flex-1 rounded-md px-1 text-sm"}
             >
               Tomorrow
             </button>
@@ -68,7 +68,7 @@ const DateRange = ({ dateRange, setDateRange }) => {
         </div>
       </div>
       <div className="mb-4 max-w-[280px] flex justify-between ">
-        <label className="font-semibold mr-2 md:mr-7 mt-2">End Date :</label>
+        <label className="text-sm sm:text-base font-semibold mr-2 md:mr-7 mt-2">End Date :</label>
         <div>
           <input
             type="date"
@@ -76,16 +76,16 @@ const DateRange = ({ dateRange, setDateRange }) => {
             onChange={(e) => setDateRange({ ...dateRange, endDate: e.target.value })}
             className="border border-gray-300 rounded-md px-2"
           />
-          <div className='flex  mt-2 gap-2'>
+          <div className='flex  mt-2 gap-2 flex-grow'>
             <button
               onClick={() => setDateRange({ ...dateRange, endDate: isEndOfThisMonth() })}
-              className={dateRange.endDate === isEndOfThisMonth() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.endDate === isEndOfThisMonth() ? "border border-gray-300  rounded-md px-1  text-sm bg-gray-200" : "border border-gray-300  rounded-md px-1  text-sm"}
             >
               Month End
             </button>
             <button
               onClick={() => setDateRange({ ...dateRange, endDate: isSemEnd() })}
-              className={dateRange.endDate === isSemEnd() ? "border border-gray-300 rounded-md px-1 text-sm bg-gray-200" : "border border-gray-300 rounded-md px-1 text-sm"}
+              className={dateRange.endDate === isSemEnd() ? "border border-gray-300  rounded-md px-1 flex-1  text-sm bg-gray-200" : "border border-gray-300  rounded-md px-1 flex-1  text-sm"}
             >
               Sem End
             </button>

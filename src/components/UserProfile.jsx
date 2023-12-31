@@ -77,7 +77,7 @@ const UserProfile = ({ currentUser, access }) => {
                 {access && <MenuItem onClick={() => { router.push('/admin') }} label={`${currentUser?.role === 'admin' ? 'Admin' : 'Owner'}`} />}
                 <hr />
                 <MenuItem onClick={() => signOut({ callbackUrl: '/signin' })} label="SignOut" />
-                <MenuItem onClick={()=>{localStorage.clear();}} label="Clear local storage" />
+                <MenuItem onClick={()=>{localStorage.clear();window.location.reload()}} label="Clear Form" />
               </>
             </div>
           )}
