@@ -62,13 +62,16 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
             <button onClick={handleDateChange} className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2 rounded-lg">Add Holiday</button>
           </div>
         }
-        <ul className="w-full px-5">
+        <ul className="w-full px-2">
+        {
+          holidayArray.length === 0 && <p className='text-center'>No Holidays</p>
+        }
           {holidayArray.map((holiday, index) => (
             <li key={index} className="mb-2 flex justify-between">
               {holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}
               {
                 !toggle &&
-                <span className="font-semibold">{holiday.title}</span>
+                 <span className="font-semibold max-w-[200px] overflow-clip ">{holiday.title}</span>
               }
               {toggle &&
                 <div className='flex justify-between'>
@@ -76,7 +79,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
                     const tempResultArray = [...holidayArray];
                     tempResultArray[index].title = e.target.value;
                     setHolidayArray(tempResultArray);
-                  }} className="px-2 w-[200px] border border-gray-300 rounded-md mr-2" />
+                  }} className="px-2 max-w-[150px] border border-gray-300 rounded-md mr-2" />
 
                   <button onClick={(e) => { e.preventDefault(); handleDeleteHoliday(index) }} className=" bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-2 rounded-lg ml-2">Delete</button>
                 </div>

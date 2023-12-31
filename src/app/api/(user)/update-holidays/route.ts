@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const id = currentUser?.id;
   const body = await req.json();
 
-  console.log(body);
+  // console.log(body);
   await db.user.update({
     where: { id: id },
     data: {
