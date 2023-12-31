@@ -31,8 +31,8 @@ const FeaturesModel = () => {
         {/* <div className="p-2 bg-red-500 text-white text-center">
           <p>Warning: You are responsible for any misuse of this app. I am not.</p>
         </div> */}
-        <div className="p-4">
-          <div className="text-lg font-semibold p-5">
+        <div className="p-2">
+          <div className="text-xs sm:text-sm md:text-base font-semibold p-2 md:p-3">
             <ul>
               <li>You can install this as an app for offline access
                 <ul>
@@ -43,7 +43,7 @@ const FeaturesModel = () => {
             </ul>
           </div>
           <div className="border-t-2 border-slate-800"></div>
-          <div className="text-lg font-semibold p-5">
+          <div className="text-xs sm:text-sm md:text-base font-semibold p-2 md:p-3">
             <ul>
               <li> You can set a password for your account in the profile page for login without google</li>
             </ul>

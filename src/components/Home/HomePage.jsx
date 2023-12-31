@@ -13,16 +13,15 @@ import HolidaysArray from "./HolidaysArray";
 import useProfileModel from "@/hooks/useProfileModel";
 import useFeaturesModel from "@/hooks/useFeaturesModel";
 import EndSemDate from "./EndSemDate";
+import UseMenuModel from "@/hooks/useMenuModel";
 
 function HomePage({ currentUser }) {
   const profileModel = useProfileModel();
   const featuresModel = useFeaturesModel();
 
   const handleClose = () => {
-    if (profileModel.isOpen)
-      profileModel.onClose();
-    if (featuresModel.isOpen)
-      featuresModel.onClose()
+    if (profileModel.isOpen) profileModel.onClose();
+    if (featuresModel.isOpen) featuresModel.onClose();
   };
 
   function padTo2Digits(num) {
@@ -58,8 +57,6 @@ function HomePage({ currentUser }) {
       padTo2Digits(lastDayOfMonth.getDate()),
     ].join("-");
   }, []);
-
-
 
   // const [currentAttendence, setCurrentAttendence] = useState({ attended: null, total: null });
   // const [classesData, setClassesData] = useState(currentUser.classesData || { Mon: 6, Tue: 6, Wed: 5, Thu: 5, Fri: 5, Sat: 5, Sun: 0 });
@@ -101,7 +98,9 @@ function HomePage({ currentUser }) {
 
   const [holidayArray, setHolidayArray] = useState(() => {
     const storedHolidayArray = localStorage.getItem("holidayArray");
-    return storedHolidayArray ? JSON.parse(storedHolidayArray) : currentUser.holidays;
+    return storedHolidayArray
+      ? JSON.parse(storedHolidayArray)
+      : currentUser.holidays;
   });
 
   const [requiredAttendence, setRequiredAttendence] = useState(() => {
@@ -110,7 +109,9 @@ function HomePage({ currentUser }) {
   });
   const [semEndDate, setSemEndDate] = useState(() => {
     const storedSemEndDate = localStorage.getItem("semEndDate");
-    return storedSemEndDate ? JSON.parse(storedSemEndDate) : currentUser.semEndDate;
+    return storedSemEndDate
+      ? JSON.parse(storedSemEndDate)
+      : currentUser.semEndDate;
   });
 
   const [result, setResult] = useState(0);
@@ -156,7 +157,7 @@ function HomePage({ currentUser }) {
     setMaxAttendenceCanSecure(
       ((currentAttendence.attended + attendCount.totalWillAttendedClasses) *
         100) /
-      (currentAttendence.total + attendCount.totalClassesTillEndDate)
+        (currentAttendence.total + attendCount.totalClassesTillEndDate)
     );
   }, [currentAttendence, attendCount]);
 
@@ -170,11 +171,14 @@ function HomePage({ currentUser }) {
 
     while (currentDate <= end) {
       const dayOfWeek = daysOfWeek[currentDate.getDay()];
-      const classesCount = holidayArray.some(item =>
-        item.Date[0] === currentDate.getDate() &&
-        item.Date[1] === currentDate.getMonth() + 1 &&
-        item.Date[2] === currentDate.getFullYear()
-      ) ? 0 : classesData[dayOfWeek];
+      const classesCount = holidayArray.some(
+        (item) =>
+          item.Date[0] === currentDate.getDate() &&
+          item.Date[1] === currentDate.getMonth() + 1 &&
+          item.Date[2] === currentDate.getFullYear()
+      )
+        ? 0
+        : classesData[dayOfWeek];
 
       tempResultArray.push({
         Date: [
@@ -281,9 +285,9 @@ function HomePage({ currentUser }) {
 
     const ClassesCanSkip = parseInt(
       attendCount.totalWillAttendedClasses -
-      ((currentAttendence.total + attendCount.totalClassesTillEndDate) *
-        (requiredAttendence / 100) -
-        currentAttendence.attended)
+        ((currentAttendence.total + attendCount.totalClassesTillEndDate) *
+          (requiredAttendence / 100) -
+          currentAttendence.attended)
     );
 
     setResult(ClassesCanSkip);
@@ -295,25 +299,33 @@ function HomePage({ currentUser }) {
     attendCount,
   ]);
 
+  const menuModel = UseMenuModel();
   return (
     <div
       className="flex flex-col md:grid grid-cols-12 h-full mt-4 p-5"
       onClick={handleClose}
     >
       {/* small devices */}
-      <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center  ">
-        <ClassesCount
-          classesData={classesData}
-          setClassesData={setClassesData}
-          currentUser={currentUser}
-        />
-        <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
-        {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
-      </div>
+
+      {menuModel.isOpen && (
+        <div className=" md:hidden flex pb-5 gap-5 items-center flex-wrap justify-center  ">
+          <ClassesCount
+            classesData={classesData}
+            setClassesData={setClassesData}
+            currentUser={currentUser}
+          />
+          <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
+          {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
+        </div>
+      )}
       {/* large Devices */}
       <div className="col-span-12  md:col-span-9 md:pr-4 ">
         <div className=" flex flex-wrap justify-center md:justify-around items-center  border shadow-lg border-black p-3 rounded-xl ">
-          <DateRange dateRange={dateRange} setDateRange={setDateRange} currentUser={currentUser} />
+          <DateRange
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            currentUser={currentUser}
+          />
           <div className="w-full border-b border-zinc-700 my-3 md:hidden" />
           <CurrentAttendence
             currentAttendence={currentAttendence}
@@ -356,12 +368,13 @@ function HomePage({ currentUser }) {
         </div>
       </div>
       <div className="hidden md:block col-span-3 ">
-
         <ClassesCount
           classesData={classesData}
           setClassesData={setClassesData}
         />
-        <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
+        {menuModel.isOpen && (
+          <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
+        )}
         <HolidaysArray
           dateRange={dateRange}
           dateArray={dateArray}

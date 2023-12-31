@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dateArray,dateRange}) => {
+const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) => {
   const router = useRouter();
   const [toggle, setToggle] = useState(false)
   const handleSave = async () => {
@@ -14,6 +14,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
 
   const handleDateChange = () => {
     if (newHoliday === '') return;
+
     const currentDate = new Date(newHoliday);
 
     // console.log(newHoliday); //2023-12-29
@@ -37,7 +38,8 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
         currentDate.getFullYear(),
         dayOfWeek
       ],
-      title: "Holiday"
+      title: "Holiday",
+      dateTime : currentDate
     }
 
     //check if this new holiday already exists
@@ -50,6 +52,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
     tempResultArray.push(newHolidayDate)
     setHolidayArray(tempResultArray);
     setNewHoliday('');
+
   };
 
 
@@ -73,7 +76,9 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday ,dat
         {
           holidayArray?.length === 0 && <p className='text-center'>No Holidays</p>
         }
-          {holidayArray.map((holiday, index) => (
+          {holidayArray
+            .sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+            .map((holiday, index) => (
             <li key={index} className="mb-2 flex justify-between">
               {holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}
               {

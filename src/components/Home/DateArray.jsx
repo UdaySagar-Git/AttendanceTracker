@@ -10,9 +10,9 @@ const DateArray = (
   }
 ) => {
   return (
-    <div className={`flex gap-4 flex-col md:flex-row  ${dateArray.length > 0 && " border shadow-lg border-black p-3 rounded-xl"}`}>
+    <div className={`flex gap-4 flex-col md:flex-row max-h-[349px]  md:max-h-[210px] overflow-y-auto overflow-x-hidden  ${dateArray.length > 0 && " border shadow-lg border-black p-3 pt-0 rounded-xl"}`}>
       {dateArray.length > 0 &&
-        <div className="px-2 hidden md:block">
+        <div className="px-2 pt-3 hidden md:block sticky top-0">
           <div className="text-sm font-semibold mb-2">Date</div>
           <div className="text-sm font-semibold mb-2">Day</div>
           <div className="text-sm font-semibold mb-1 w-[130px] flex justify-between ">
@@ -32,7 +32,7 @@ const DateArray = (
       }
       {/* small screen */}
       {dateArray.length > 0 &&
-        <div className="px-2 md:hidden flex justify-around items-center ">
+        <div className="px-2 md:hidden flex justify-around items-center sticky top-0 bg-white pt-3">
           <div className="text-sm font-semibold  flex justify-between ">
             <span className=''>Total Classes</span>
             <span className=''>
@@ -51,7 +51,7 @@ const DateArray = (
       }
       <div>
         {dateArray.length > 0 && (
-          <div className="flex flex-wrap  justify-center md:justify-start">
+          <div className="flex flex-wrap  justify-center md:justify-start md:pt-3">
             {dateArray.map((item, index) => (
               <div key={index} className="w-14 flex flex-col justify-center items-center">
                 {/* <div>{`${item.Date[0]}/${item.Date[1]}/${item.Date[2]} `}</div> */}

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   await db.user.update({
     where: { id: id },
     data: {
-      semEndDate : body.newDate,
+      semEndDate : body.semEndDate,
     },
   });
 
