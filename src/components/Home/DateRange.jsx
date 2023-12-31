@@ -36,8 +36,8 @@ const DateRange = ({ dateRange, setDateRange,currentUser }) => {
   //todo : change this to sem end date from db
 
   const isSemEnd = () => {
-    const endSemDate = (currentUser?.semEndDate )
-    return endSemDate
+    const endSemDate = currentUser?.semEndDate;
+    if (endSemDate) return endSemDate;
   }
 
   return (

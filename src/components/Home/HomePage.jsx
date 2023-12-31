@@ -108,6 +108,10 @@ function HomePage({ currentUser }) {
     const storedRequiredAttendence = localStorage.getItem("requiredAttendence");
     return storedRequiredAttendence ? JSON.parse(storedRequiredAttendence) : 75;
   });
+  const [semEndDate, setSemEndDate] = useState(() => {
+    const storedSemEndDate = localStorage.getItem("semEndDate");
+    return storedSemEndDate ? JSON.parse(storedSemEndDate) : currentUser.semEndDate;
+  });
 
   const [result, setResult] = useState(0);
   const [attendCount, setAttendCount] = useState({});
@@ -136,6 +140,10 @@ function HomePage({ currentUser }) {
   useEffect(() => {
     localStorage.setItem("holidayArray", JSON.stringify(holidayArray));
   }, [holidayArray]);
+
+  useEffect(() => {
+    localStorage.setItem("semEndDate", JSON.stringify(semEndDate));
+  }, [semEndDate]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -299,7 +307,7 @@ function HomePage({ currentUser }) {
           setClassesData={setClassesData}
           currentUser={currentUser}
         />
-        <EndSemDate currentUser={currentUser} />
+        <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
         {/* <HolidaysArray holidayArray={holidayArray} setHolidayArray={setHolidayArray} /> */}
       </div>
       {/* large Devices */}
@@ -353,7 +361,7 @@ function HomePage({ currentUser }) {
           classesData={classesData}
           setClassesData={setClassesData}
         />
-        <EndSemDate  currentUser={currentUser} />
+        <EndSemDate semEndDate={semEndDate} setSemEndDate={setSemEndDate} />
         <HolidaysArray
           dateRange={dateRange}
           dateArray={dateArray}
