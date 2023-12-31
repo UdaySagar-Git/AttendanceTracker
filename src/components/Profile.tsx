@@ -3,8 +3,11 @@
 // Import statements
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const Profile = ({ currentUser } :any) => {
+  const router = useRouter()
   const email = currentUser?.email;
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -32,7 +35,6 @@ const Profile = ({ currentUser } :any) => {
 
       if (response?.ok) {
         toast.success("Profile updated successfully");
-        window.location.href = '/';
         return;
       }
       if (!response.ok) {
@@ -49,6 +51,32 @@ const Profile = ({ currentUser } :any) => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    try {
+      const response = await fetch("/api/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response?.ok) {
+        toast.success("Login again to create new password");
+        localStorage.clear();
+        signOut({ callbackUrl: "/signin?callbackUrl=profile" })
+        return;
+      }
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.message);
+        return;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while sending password reset link");
+    }
+  }
   return (
     <div className="flex justify-center items-center w-full h-[80vh]">
       <div className="max-w-[600px] p-5 m-auto">
@@ -66,7 +94,7 @@ const Profile = ({ currentUser } :any) => {
             </div>
             {currentUser?.password && (
               <div className="flex gap-2 sm:gap-6 flex-wrap sm:flex-nowrap ">
-                <label className="text-lg font-medium w-full sm:w-[35%]  ">Password</label> <span className="font-bold hidden sm:block">:</span>
+                <label className="text-lg font-medium w-full sm:w-[35%]  ">Old Password <a onClick={handleForgotPassword} className="text-xs text-blue-500 hover:cursor-pointer hover:text-red-700">forgot?</a> </label> <span className="font-bold hidden sm:block">:</span>
                 <input
                   type="password"
                   placeholder="Old Password"
