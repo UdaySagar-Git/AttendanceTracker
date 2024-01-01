@@ -12,8 +12,8 @@ export async function POST(req: Request) {
   const holidayArray = body.holidayArray;
 
   //divide holiday array into public and not public
-  const publicHolidays = holidayArray.filter((holiday) => holiday.isPublic);
-  const privateHolidays = holidayArray.filter((holiday) => !holiday.isPublic);
+  const publicHolidays = holidayArray.filter((holiday :any) => holiday.isPublic);
+  const privateHolidays = holidayArray.filter((holiday :any ) => !holiday.isPublic);
 
   // console.log(body);
   await db.user.update({
