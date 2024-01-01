@@ -6,7 +6,7 @@ import getCurrentUser from '@/actions/getCurrentUser'
 import ToasterProvider from '@/components/ToasterProvider'
 import AuthProvider from '@/providers/AuthProvider'
 import FeaturesModel from '@/models/FeaturesModel'
-import UnauthorizedPage from '../components/UnauthorizedPage'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -39,6 +39,7 @@ export default async function RootLayout({
           <FeaturesModel />
           {/* </div> */}
           {children}
+          <SpeedInsights />
         </body>
       </html>
     </AuthProvider>
