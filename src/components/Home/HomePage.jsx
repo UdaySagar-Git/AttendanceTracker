@@ -98,9 +98,12 @@ function HomePage({ currentUser }) {
 
   const [holidayArray, setHolidayArray] = useState(() => {
     const storedHolidayArray = localStorage.getItem("holidayArray");
+    const defaultHolidayArray = [...currentUser.publicHolidays,...currentUser.holidays];
+    //sort before setting
+    defaultHolidayArray.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
     return storedHolidayArray
       ? JSON.parse(storedHolidayArray)
-      : currentUser.holidays;
+      : defaultHolidayArray;
   });
 
   const [requiredAttendence, setRequiredAttendence] = useState(() => {
@@ -222,7 +225,10 @@ function HomePage({ currentUser }) {
   const handleDeleteHoliday = (index) => {
     const tempResultArray = [...holidayArray];
     tempResultArray.splice(index, 1);
+    //sort before setting
+    tempResultArray.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
     setHolidayArray(tempResultArray);
+
 
     //on deletion of that date , should update the dateArray of that date to classesData values
     const tempDateArray = [...dateArray];
@@ -241,6 +247,8 @@ function HomePage({ currentUser }) {
         date.Date[1] == holidayArray[index].Date[1] &&
         date.Date[2] == holidayArray[index].Date[2]
     );
+    // only do this if the deleted holiday is in the dateArray
+    if (indexInDateArray == -1) return;
     tempDateArray[indexInDateArray].ClassesCount = classesCount;
     tempDateArray[indexInDateArray].AttendCount = classesCount;
     setDateArray(tempDateArray);
