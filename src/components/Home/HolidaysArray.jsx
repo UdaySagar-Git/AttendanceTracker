@@ -74,7 +74,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
             <button onClick={handleDateChange} className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2 rounded-lg">Add Holiday</button>
           </div>
         }
-      <div className='border shadow-lg border-black p-1 sm:p-3 rounded-xl flex flex-col justify-center items-center max-h-[300px] overflow-y-scroll'>
+      <div className='border shadow-lg border-black px-1 py-3 sm:p-3 rounded-xl flex flex-col justify-center items-center max-h-[300px] overflow-y-scroll'>
         <ul className="w-full px-2">
           {
             holidayArray?.length === 0 && <p className='text-center'>No Holidays</p>
