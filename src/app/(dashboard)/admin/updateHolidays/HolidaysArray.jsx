@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+"use client"
+
+import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) => {
+const HolidaysArray = ({currentUser}) => {
+  const [holidayArray, setHolidayArray] = useState(
+    () => {
+      const storedHolidayArray = localStorage.getItem('publicHolidays');
+      return storedHolidayArray ? JSON.parse(storedHolidayArray) : (currentUser.publicHolidays || []);
+    }
+  );
+
+  useEffect(() => {
+    localStorage.setItem('publicHolidays', JSON.stringify(holidayArray));
+  }, [holidayArray]);
+
+  const handleDeleteHoliday = (index) => {
+    const tempResultArray = [...holidayArray];
+    tempResultArray.splice(index, 1);
+    setHolidayArray(tempResultArray);
+  };
+
   const router = useRouter();
   const [toggle, setToggle] = useState(false)
   const handleSave = async () => {
     setToggle(!toggle)
-    await axios.post('/api/update-holidays',  {holidayArray} );
+    await axios.post('/api/update-global-holidays',  {holidayArray} );
     // router.refresh()
   }
   const [newHoliday, setNewHoliday] = useState('');
@@ -16,17 +35,6 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
     if (newHoliday === '') return;
 
     const currentDate = new Date(newHoliday);
-
-    // console.log(newHoliday); //2023-12-29
-    // console.log(dateRange); //{ "startDate": "2024-01-01", "endDate": "2024-01-07" }
-
-    // const startDate = new Date(dateRange.startDate);
-    // const endDate = new Date(dateRange.endDate);
-
-    // if (currentDate < startDate || currentDate > endDate) {
-    //   alert('Please select a date within the date range');
-    //   return;
-    // }
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const dayOfWeek = daysOfWeek[currentDate.getDay()];
@@ -40,7 +48,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
       ],
       title: "Holiday",
       dateTime : currentDate,
-      isPublic : false
+      isPublic : true
     }
 
     //check if this new holiday already exists
@@ -53,7 +61,6 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
     tempResultArray.push(newHolidayDate)
     setHolidayArray(tempResultArray);
     setNewHoliday('');
-
   };
 
 
@@ -92,7 +99,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
                     const tempResultArray = [...holidayArray];
                     tempResultArray[index].title = e.target.value;
                     setHolidayArray(tempResultArray);
-                  }} className="px-2 max-w-[150px] border border-gray-300 rounded-md mr-2" />
+                  }} className="px-2 w-full border border-gray-300 rounded-md mr-2" />
 
                   <button onClick={(e) => { e.preventDefault(); handleDeleteHoliday(index) }} className=" bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-2 rounded-lg ml-2">Delete</button>
                 </div>

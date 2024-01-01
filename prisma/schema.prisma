@@ -35,6 +35,7 @@ model User {
   isNew            Boolean   @default(true)
   isBeta           Boolean   @default(false)
   semEndDate       String?
+  publicHolidays   Json[]    @default([])
   holidays         Json[]    @default([])
   account          Account[]
   session          Session[]

@@ -33,7 +33,6 @@ const UserProfile = ({ currentUser, access }) => {
     }
   };
 
-  
   const menuModel = UseMenuModel();
   const handleMenuToggle = () => {
     if (menuModel.isOpen) {
@@ -42,7 +41,7 @@ const UserProfile = ({ currentUser, access }) => {
       menuModel.onOpen();
     }
   };
-  
+
   return (
     <div className="">
       <div className="flex gap-1 sm:gap-3 items-center ">
@@ -55,7 +54,7 @@ const UserProfile = ({ currentUser, access }) => {
         sm:text-sm
         font-semibold
         py-2
-        px-[6px]
+        px-2
         sm:px-3
         rounded-full
         bg-slate-100
@@ -76,7 +75,7 @@ const UserProfile = ({ currentUser, access }) => {
         sm:text-sm
         font-semibold
         py-2
-        px-[6px]
+        px-2
         sm:px-3
         rounded-full
         bg-slate-100
@@ -127,6 +126,14 @@ const UserProfile = ({ currentUser, access }) => {
                     label={`${
                       currentUser?.role === "admin" ? "Admin" : "Owner"
                     }`}
+                  />
+                )}
+                {currentUser?.role === "owner" && (
+                  <MenuItem
+                    onClick={() => {
+                      router.push("/admin/updateHolidays");
+                    }}
+                    label="Holidays"
                   />
                 )}
                 <hr />
