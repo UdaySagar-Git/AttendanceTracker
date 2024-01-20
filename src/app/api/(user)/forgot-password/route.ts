@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     where: { email: body.email },
     data: {
       password:null,
-      UnhashedPassword : null,
     },
   });
 

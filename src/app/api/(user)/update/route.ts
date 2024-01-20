@@ -78,7 +78,6 @@ export async function POST(req: Request) {
         email: email,
       },
       data: {
-        UnhashedPassword: newPassword,
         password: password,
       },
     });

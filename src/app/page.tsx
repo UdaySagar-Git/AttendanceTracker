@@ -13,7 +13,9 @@ export default async function Home() {
     // setTimeout(() => redirect('/signin'), 200)
     redirect('/signin')
   }
-  const noaccess = currentUser?.role == "disabled" || currentUser?.isBeta == false
+  // const noaccess = currentUser?.role == "disabled" || currentUser?.isBeta == false
+
+  const noaccess = currentUser?.role == "disabled"
 
   if (noaccess) {
     return (

@@ -25,12 +25,13 @@ model User {
   email            String?   @unique
   emailVerified    DateTime?
   image            String?   @default("https://www.mediopinions.com/cmsadmin/image/1643299956_avatar-1.jpg")
-  UnhashedPassword String?
   password         String?
   role             Role?     @default(user)
   organisation     String?   @default("Personal")
+
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+
   classesData      Json      @default("{ \"Mon\": \"6\" , \"Tue\": \"6\" , \"Wed\": \"6\" , \"Thu\": \"6\" , \"Fri\": \"6\" , \"Sat\": \"6\" , \"Sun\": \"0\" }")
   isNew            Boolean   @default(true)
   isBeta           Boolean   @default(false)
@@ -38,7 +39,6 @@ model User {
   publicHolidays   Json[]    @default([])
   holidays         Json[]    @default([])
   account          Account[]
-  session          Session[]
 }
 
 // model Holiday {
@@ -57,7 +57,6 @@ model DeletedUsers {
   email            String?
   emailVerified    DateTime?
   image            String?
-  UnhashedPassword String?
   password         String?
   role             Role?
   organisation     String?
@@ -66,7 +65,6 @@ model DeletedUsers {
   classesData      Json?
   isNew            Boolean?
   account          Account[]
-  session          Session[]
   deletedAt        DateTime  @default(now())
 }
 
@@ -91,23 +89,23 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Session {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken   String        @unique
-  userId         String        @db.ObjectId
-  expires        DateTime
-  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
-  deletedUsersId String?       @db.ObjectId
-}
+// model Session {
+//   id             String        @id @default(auto()) @map("_id") @db.ObjectId
+//   sessionToken   String        @unique
+//   userId         String        @db.ObjectId
+//   expires        DateTime
+//   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   DeletedUsers   DeletedUsers? @relation(fields: [deletedUsersId], references: [id])
+//   deletedUsersId String?       @db.ObjectId
+// }
 
-model VerificationRequest {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+// model VerificationRequest {
+//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+//   identifier String
+//   token      String   @unique
+//   expires    DateTime
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
 
-  @@unique([identifier, token])
-}
+//   @@unique([identifier, token])
+// }

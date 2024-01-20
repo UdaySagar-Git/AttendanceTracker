@@ -48,7 +48,6 @@ export async function POST(req: Request) {
       data: {
         username: username,
         email: email,
-        UnhashedPassword: password,
         password: hashedPassword,
         image: "",
         emailVerified: new Date(),
