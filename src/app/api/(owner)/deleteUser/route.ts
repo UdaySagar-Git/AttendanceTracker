@@ -20,6 +20,7 @@ export async function POST(req: Request) {
   }
 
   if (currentUser.role === "owner") {
+
     const user = await db.user.update({
       where: {
         id: body.id,
@@ -28,13 +29,16 @@ export async function POST(req: Request) {
         role: "deleted",
       },
     });
+
     const { id, ...rest } = user;
     const deleted = { userId: id, ...rest };
+    
     const deletedUser = await db.deletedUsers.create({
       data: {
         ...deleted,
       },
     });
+
     await db.user.delete({
       where: {
         id: body.id,

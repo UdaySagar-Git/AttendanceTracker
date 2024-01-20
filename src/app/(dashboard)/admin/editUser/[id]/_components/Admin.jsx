@@ -133,17 +133,6 @@ const Page = ({ params }) => {
             />
           </label>
 
-          {/* <div>
-            <label className="block mb-2 text-sm">
-              Password:
-              <input
-                type="text"
-                value={user?.UnhashedPassword}
-                disabled
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-              />
-            </label>
-          </div> */}
           <label className="block mb-2 text-sm">
             Role:
             <select

@@ -24,11 +24,7 @@ export default async function getCurrentUser() {
       throw new Error("Not signed in");
     }
 
-    const { UnhashedPassword, ...rest } = currentUser;
-
-    // const currentUserDetails = rest;
-
-    return rest;
+    return currentUser;
     
   } catch (error: any) {
     return null;

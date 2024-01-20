@@ -7,7 +7,7 @@ import { User } from '@prisma/client';
 import UserProfile from './UserProfile';
 import { IoHome } from "react-icons/io5";
 
-type newUser = Omit<User, 'UnhashedPassword'>
+type newUser = User
 
 interface Props {
   currentUser?: newUser | null;
