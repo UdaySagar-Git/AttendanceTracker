@@ -74,7 +74,7 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
             <button onClick={handleDateChange} className="bg-gray-950 hover:bg-gray-800 text-white text-sm font-semibold p-2 rounded-lg">Add Holiday</button>
           </div>
         }
-      <div className='border shadow-lg border-black px-1 py-3 sm:p-3 rounded-xl flex flex-col justify-center items-center max-h-[300px] overflow-y-scroll'>
+      <div className='border shadow-lg border-black px-1 py-3 sm:p-3 rounded-xl  justify-center items-center max-h-[300px] overflow-y-scroll'>
         <ul className="w-full px-2">
           {
             holidayArray?.length === 0 && <p className='text-center'>No Holidays</p>
@@ -86,9 +86,8 @@ const HolidaysArray = ({ holidayArray, setHolidayArray, handleDeleteHoliday }) =
                 <span className={`w-[90px] ${!holiday.isPublic ? 'text-red-500' : 'text-gray-500'}`}>{holiday.Date[0]}/{holiday.Date[1]}/{holiday.Date[2]}</span>
                 {
                   !toggle &&
-                  <span className="font-semibold max-w-[200px] overflow-hidden whitespace-nowrap overflow-ellipsis">{holiday.title}</span>
+                  <span className="font-semibold max-w-[200px] overflow-hidden whitespace-nowrap ">{holiday.title}</span>
                 }
-                {/* todo : fix scroll issue  */}
                 {toggle &&
                   <div className='flex justify-between'>
                     <input type="text" value={holiday.title} onChange={(e) => {
