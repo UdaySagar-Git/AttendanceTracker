@@ -276,7 +276,7 @@ function HomePage({ currentUser }) {
   ]);
 
   const handleCalculate = useCallback(() => {
-    let totalClassesTillEndDate = 0; //a
+    let totalClassesTillEndDate = 0; 
     let totalWillAttendedClasses = 0;
     dateArray.forEach((item) => {
       totalClassesTillEndDate += parseInt(item.ClassesCount);
