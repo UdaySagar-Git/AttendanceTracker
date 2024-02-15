@@ -4,7 +4,7 @@ import { db } from "@/libs/db";
 import * as z from "zod";
 
 const userSchema = z.object({
-  username: z.string().min(1, "Username is required").max(100),
+  name: z.string().min(1, "Name is required").max(100),
   email: z.string().min(1, "Email is required").email("Invalid email"),
   password: z
     .string()
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { username, email, password } = userSchema.parse(body);
+    const { name, email, password } = userSchema.parse(body);
 
     //checking if the username or email already exists
     const isEmailExists = await db.user.findUnique({
@@ -30,26 +30,15 @@ export async function POST(req: Request) {
       );
     }
 
-    const isUsernameExists = await db.user.findFirst({
-      where: { username: username },
-    });
-    if (isUsernameExists !== null) {
-      return NextResponse.json(
-        { user: null, message: "Username already exists" },
-        { status: 409 }
-      );
-    }
-
     //hashing the password
     const hashedPassword = await hash(password, 10);
 
     //creating the user
     const user = await db.user.create({
       data: {
-        username: username,
+        name: name,
         email: email,
         password: hashedPassword,
-        image: "",
         emailVerified: new Date(),
       },
     });

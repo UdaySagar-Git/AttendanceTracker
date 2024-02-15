@@ -17,12 +17,14 @@ const SignUp = () => {
       return;
     }
 
+    const {email, name} = data;
+
     const response = await fetch('/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...data, email: email.toLowerCase(), username: username.toLowerCase() }),
+      body: JSON.stringify({ ...data, email: email.toLowerCase(), name: name.toLowerCase() }),
     });
 
     if (response.ok) {
@@ -49,11 +51,11 @@ const SignUp = () => {
         <div className="flex flex-col gap-3">
           <input
             type="text"
-            placeholder="Username"
+            placeholder="name"
             className="border border-gray-300 px-2 py-1 rounded-lg"
-            {...register("username", { required: "Username is required" })}
+            {...register("name", { required: "Name is required" })}
           />
-          {errors.username && <p className="text-red-500">{errors.username.message}</p>}
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
           <input
             type="email"
             placeholder="Email"
