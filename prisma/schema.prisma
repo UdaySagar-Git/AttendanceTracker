@@ -24,7 +24,7 @@ model User {
   username         String?
   email            String?   @unique
   emailVerified    DateTime?
-  image            String?   @default("https://www.mediopinions.com/cmsadmin/image/1643299956_avatar-1.jpg")
+  image            String?   @default("https://raw.githubusercontent.com/UdaySagar-Git/attendenceCalculator/main/public/images/placeholder.jpg")
   password         String?
   role             Role?     @default(user)
   organisation     String?   @default("Personal")

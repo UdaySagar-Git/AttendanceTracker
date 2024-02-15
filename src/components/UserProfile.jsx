@@ -45,11 +45,10 @@ const UserProfile = ({ currentUser, access }) => {
   return (
     <div className="">
       <div className="flex gap-1 sm:gap-3 items-center ">
-        {currentUser?.isBeta && (
-          <div className="flex gap-1 sm:gap-3">
-            <div
-              onClick={handleFeaturesToggle}
-              className={`
+        <div className="flex gap-1 sm:gap-3">
+          <div
+            onClick={handleFeaturesToggle}
+            className={`
         text-xs
         sm:text-sm
         font-semibold
@@ -65,12 +64,12 @@ const UserProfile = ({ currentUser, access }) => {
         border-slate-200
         ${featuresModel.isOpen && "border-2 bg-slate-200"}
     `}
-            >
-              Features
-            </div>
-            <div
-              onClick={handleMenuToggle}
-              className={`
+          >
+            Features
+          </div>
+          <div
+            onClick={handleMenuToggle}
+            className={`
         text-xs
         sm:text-sm
         font-semibold
@@ -86,11 +85,11 @@ const UserProfile = ({ currentUser, access }) => {
         border-slate-200
         ${menuModel.isOpen && "border-2 bg-slate-200"}
     `}
-            >
-              Menu
-            </div>
+          >
+            Menu
           </div>
-        )}
+        </div>
+
         <div
           onClick={onToggle}
           className="relative px-2 py-1 border-[1px] border-neutral-200 flex items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
