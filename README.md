@@ -1,8 +1,6 @@
 ### Attendance Tracker
 
-- This code has not been optimized and is intended for personal use only.
-
-Features:
+## Features:
 - Custom holiday list support
 - Modify class counts on specific days
 - Change attendance count on specific days and calculate attendance accordingly
