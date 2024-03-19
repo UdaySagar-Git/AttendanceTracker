@@ -11,7 +11,7 @@
 
 ## Login and SignUp 
 ![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/6d865091-009a-4da6-8b97-b139ed38e501)
-![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/2f629351-2318-43f0-887d-d0b18524d758)
+![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/49b0267a-14d7-40fd-ad61-5118384ba9e5)
 
 ## User Dashboard
 ![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/a5c9b811-58de-40fb-bdd0-a552fee04044)
