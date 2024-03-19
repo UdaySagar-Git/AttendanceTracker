@@ -28,6 +28,10 @@
 ![Screenshot from 2024-03-19 23-08-09](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/2fe8ba34-7db4-4a92-aaf8-9b1c3d755162)
 ![Screenshot from 2024-03-19 23-08-22](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/871e40fb-6940-4d20-9dc7-225cf5ab5e74)
 
+## Edit User Profile privileges for Owner
+![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/3f2e87a0-cca8-4a2d-9c44-07d7309c8ce6)
+
+
 ## Common Holidays
 - Owner can add/remove common holidays
 ![image](https://github.com/UdaySagar-Git/AttendanceTracker/assets/111575806/cd5bc21e-15eb-45e6-b7bc-8e48eaaf5a0b)
